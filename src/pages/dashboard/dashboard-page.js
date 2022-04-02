@@ -36,11 +36,12 @@ const DashboardPage = () => {
                     )
                 }
 
-                <Grid sx={{mb: 4, mt: 8}}
-                      container={true}
-                      justifyContent="space-between"
-                      spacing={2}
-                      alignItems="center">
+                <Grid
+                    sx={{my: 4, mt: {xs: 8, md: 4}}}
+                    container={true}
+                    justifyContent="space-between"
+                    spacing={2}
+                    alignItems="center">
                     <Grid item={true} xs={12} md={4}>
                         <Typography variant="h4">
                             Dashboard

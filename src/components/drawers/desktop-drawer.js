@@ -2,9 +2,11 @@ import {Box, Button, Divider, Stack, Typography} from "@mui/material";
 import SidebarLink from "../shared/sidebar-link";
 import {useLocation} from "react-router";
 import {
+    AccountBalance, AccountBalanceOutlined,
+    CompareArrows, CompareArrowsOutlined,
     Dashboard,
-    DashboardOutlined,
-    Logout,
+    DashboardOutlined, Face, FaceOutlined, InsertInvitation, InsertInvitationOutlined,
+    Logout, MonetizationOn, MonetizationOnOutlined, Send, SendOutlined,
     Settings,
     SettingsOutlined,
     VerifiedUser,
@@ -46,8 +48,8 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/transactions' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <CompareArrows sx={{color: 'text.link'}}/> :
+                                <CompareArrowsOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/transactions"
                         label="Transactions"
@@ -56,8 +58,8 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/bank-accounts' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <AccountBalance sx={{color: 'text.link'}}/> :
+                                <AccountBalanceOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/bank-accounts"
                         label="Bank Accounts"
@@ -67,8 +69,8 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/funds' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <MonetizationOn sx={{color: 'text.link'}}/> :
+                                <MonetizationOnOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/funds"
                         label="Funds"
@@ -78,8 +80,8 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/requests' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <Send sx={{color: 'text.link'}}/> :
+                                <SendOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/requests"
                         label="Requests"
@@ -89,8 +91,8 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/invitations' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <InsertInvitation sx={{color: 'text.link'}}/> :
+                                <InsertInvitationOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/invitations"
                         label="Invitations"
@@ -100,8 +102,8 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/users' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <Face sx={{color: 'text.link'}}/> :
+                                <FaceOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/users"
                         label="Users"
@@ -111,8 +113,8 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/admins' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <VerifiedUser sx={{color: 'text.link'}}/> :
+                                <VerifiedUserOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/admins"
                         label="Admins"
