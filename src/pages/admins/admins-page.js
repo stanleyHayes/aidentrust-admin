@@ -106,7 +106,7 @@ const AdminsPage = () => {
                             spacing={2}
                             alignItems="center"
                             justifyContent="flex-start">
-                            <Grid item={true} xs={12} md={2}>
+                            <Grid item={true} xs={12} md={10}>
                                 <TextField
                                     label="Search"
                                     fullWidth={true}
@@ -124,10 +124,11 @@ const AdminsPage = () => {
                                 <Button
                                     disableElevation={true}
                                     size="medium"
-                                    color="primary"
+                                    color="secondary"
                                     fullWidth={true}
                                     sx={{
-                                        color: 'white',
+                                        color: 'black',
+                                        fontWeight: 'bold',
                                         textTransform: 'capitalize'
                                     }}
                                     variant="contained">
@@ -138,18 +139,22 @@ const AdminsPage = () => {
                     </Grid>
                     <Grid item={true} xs={12} md={3}>
                         <Grid container={true} spacing={2}>
-                            <Grid item={true} xs={6}>
+                            <Grid item={true} md={6} xs={12}>
                                 <Button
                                     disableElevation={true}
                                     size="medium"
-                                    color="secondary"
+                                    color="primary"
                                     fullWidth={true}
-                                    sx={{color: 'black', textTransform: 'capitalize'}}
-                                    variant="contained">
+                                    sx={{
+                                        color: 'primary.main',
+                                        textTransform: 'capitalize',
+                                        fontWeight: 'bold'
+                                }}
+                                    variant="outlined">
                                     Invite
                                 </Button>
                             </Grid>
-                            <Grid item={true} xs={6}>
+                            <Grid item={true}  md={6} xs={12}>
                                 <Button
                                     disableElevation={true}
                                     size="medium"
