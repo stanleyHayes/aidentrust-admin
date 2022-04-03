@@ -2,9 +2,11 @@ import {Box, Button, Divider, Stack, Typography} from "@mui/material";
 import SidebarLink from "../shared/sidebar-link";
 import {useLocation} from "react-router";
 import {
+    AccountBalance, AccountBalanceOutlined,
+    CompareArrows, CompareArrowsOutlined,
     Dashboard,
-    DashboardOutlined,
-    Logout,
+    DashboardOutlined, Face, FaceOutlined, InsertInvitation, InsertInvitationOutlined,
+    Logout, MonetizationOn, MonetizationOnOutlined, Send, SendOutlined,
     Settings,
     SettingsOutlined,
     VerifiedUser,
@@ -22,7 +24,7 @@ const MobileDrawer = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 pt: 2,
-                minWidth: '70vw'
+                minWidth: '90vw'
             }}>
             <Box sx={{flex: 1}}>
                 <Stack mb={2} direction="column">
@@ -50,8 +52,8 @@ const MobileDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/transactions' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <CompareArrows sx={{color: 'text.link'}}/> :
+                                <CompareArrowsOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/transactions"
                         label="Transactions"
@@ -60,8 +62,8 @@ const MobileDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/bank-accounts' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <AccountBalance sx={{color: 'text.link'}}/> :
+                                <AccountBalanceOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/bank-accounts"
                         label="Bank Accounts"
@@ -71,8 +73,8 @@ const MobileDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/funds' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <MonetizationOn sx={{color: 'text.link'}}/> :
+                                <MonetizationOnOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/funds"
                         label="Funds"
@@ -82,8 +84,8 @@ const MobileDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/requests' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <Send sx={{color: 'text.link'}}/> :
+                                <SendOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/requests"
                         label="Requests"
@@ -93,8 +95,8 @@ const MobileDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/invitations' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <InsertInvitation sx={{color: 'text.link'}}/> :
+                                <InsertInvitationOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/invitations"
                         label="Invitations"
@@ -104,8 +106,8 @@ const MobileDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/users' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <Face sx={{color: 'text.link'}}/> :
+                                <FaceOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/users"
                         label="Users"
@@ -115,8 +117,8 @@ const MobileDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/admins' ?
-                                <Dashboard sx={{color: 'text.link'}}/> :
-                                <DashboardOutlined sx={{color: 'text.secondary'}}/>
+                                <VerifiedUser sx={{color: 'text.link'}}/> :
+                                <VerifiedUserOutlined sx={{color: 'text.secondary'}}/>
                         }
                         path="/admins"
                         label="Admins"
@@ -125,7 +127,12 @@ const MobileDrawer = () => {
                 </Stack>
             </Box>
 
-            <Box sx={{pb: 4}}>
+            <Stack
+                spacing={0.5}
+                divider={<Divider orientation="horizontal" light={true} variant="middle"/>}
+                mt={2}
+                direction="column"
+                sx={{pb: 4}}>
                 <SidebarLink
                     icon={
                         pathname === '/settings' ?
@@ -154,7 +161,7 @@ const MobileDrawer = () => {
                         borderRadius: 0,
                         justifyContent: 'flex-start',
                         textTransform: 'capitalize',
-                        fontSize: 12,
+                        fontSize: 14,
                         paddingLeft: 4
                     }}
                     color="primary"
@@ -163,7 +170,7 @@ const MobileDrawer = () => {
                     fullWidth={true}>
                     Logout
                 </Button>
-            </Box>
+            </Stack>
         </Box>
     )
 }

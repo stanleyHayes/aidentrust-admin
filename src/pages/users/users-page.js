@@ -26,6 +26,7 @@ import {green, grey, red} from "@mui/material/colors";
 import User from "../../components/shared/user";
 import {selectUser} from "../../redux/users/users-reducer";
 import {useNavigate} from "react-router";
+import UserInvitationDialog from "../../components/dialogs/new/user-invitation-dialog";
 
 const UsersPage = () => {
 
@@ -40,6 +41,8 @@ const UsersPage = () => {
 
     const {users, userError, userLoading} = useSelector(selectUser);
     const classes = useStyles();
+
+    const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
 
     const [query, setQuery] = useState("");
     const navigate = useNavigate();
@@ -148,6 +151,7 @@ const UsersPage = () => {
                         <Grid container={true} spacing={2}>
                             <Grid item={true} xs={12} md={6}>
                                 <Button
+                                    onClick={() => setInviteDialogOpen(true)}
                                     disableElevation={true}
                                     size="medium"
                                     color="primary"
@@ -215,7 +219,7 @@ const UsersPage = () => {
                                                 </TableCell>
                                                 <TableCell align="center">{user.email}</TableCell>
                                                 <TableCell align="center">{user.username}</TableCell>
-                                                <TableCell align="center">{user.phone}</TableCell>
+                                                <TableCell align="center">{user.phoneNumber}</TableCell>
                                                 <TableCell
                                                     align="center">{renderStatus(user.accountStatus.status)}</TableCell>
                                                 <TableCell align="center">
@@ -229,12 +233,16 @@ const UsersPage = () => {
                                                         spacing={1}>
                                                         <Grid item={true}>
                                                             <Visibility
+                                                                sx={{cursor: 'pointer'}}
+                                                                onClick={() => navigate(`/users/${user._id}/detail`)}
                                                                 fontSize="small"
                                                                 color="primary"
                                                             />
                                                         </Grid>
                                                         <Grid item={true}>
                                                             <Edit
+                                                                sx={{cursor: 'pointer'}}
+                                                                onClick={() => navigate(`/users/${user._id}/update`)}
                                                                 fontSize="small"
                                                                 color="primary"
                                                             />
@@ -274,6 +282,15 @@ const UsersPage = () => {
                                 No Users available
                             </Typography>
                         </Box>
+                    )
+                }
+
+                {
+                    inviteDialogOpen && (
+                        <UserInvitationDialog
+                            open={inviteDialogOpen}
+                            handleClose={() => setInviteDialogOpen(false)}
+                        />
                     )
                 }
             </Container>

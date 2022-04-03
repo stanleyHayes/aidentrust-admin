@@ -25,7 +25,7 @@ import {Edit, Visibility} from "@mui/icons-material";
 import {green, grey, purple, red} from "@mui/material/colors";
 import User from "../../components/shared/user";
 import {selectInvitation} from "../../redux/invitations/invitation-reducer";
-import InviteAdminDialog from "../../components/dialogs/new/add-invitation-dialog";
+import InviteAdminDialog from "../../components/dialogs/new/admin-invitation-dialog";
 
 const InvitationsPage = () => {
 
@@ -127,9 +127,8 @@ const InvitationsPage = () => {
                                     required={true}
                                     variant="outlined"
                                     value={query}
-                                    type="email"
+                                    type="text"
                                     size="small"
-                                    defaultValue=""
                                     onChange={event => setQuery(event.target.value)}
                                 />
                             </Grid>

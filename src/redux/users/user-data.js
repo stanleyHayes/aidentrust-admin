@@ -1,5 +1,6 @@
 export const users = [
     {
+        _id: 1,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',
@@ -13,6 +14,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 2,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',
@@ -26,6 +28,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 3,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',
@@ -39,6 +42,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 4,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',
@@ -52,6 +56,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 5,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',
@@ -65,6 +70,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 6,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',
@@ -78,6 +84,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 7,
         firstName: 'Antoinette',
         lastName: 'Dewortor',
         email: 'antoinette.dewortor@acity.edu.gh',
@@ -91,6 +98,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 8,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',
@@ -104,6 +112,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 9,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',
@@ -117,6 +126,7 @@ export const users = [
         updatedAt: new Date(2020, 4, 6)
     },
     {
+        _id: 10,
         firstName: 'Stanley',
         lastName: 'Hayford',
         email: 'hayfordstanley@gmail.com',

@@ -1,5 +1,6 @@
 export const admins = [
     {
+        _id: 1,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -9,9 +10,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 2,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -21,9 +23,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 3,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -33,9 +36,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 4,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -45,9 +49,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 5,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -57,9 +62,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 6,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -69,9 +75,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 7,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -81,9 +88,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 8,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -93,9 +101,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 9,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -105,9 +114,10 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
     {
+        _id: 10,
         image: '',
         firstName: 'Stanley',
         lastName: 'Hayford',
@@ -117,6 +127,6 @@ export const admins = [
             status: 'Active'
         },
         username: 'zeus',
-        modifiedAt: new Date(2022, 4, 3)
+        updatedAt: new Date(2022, 4, 3)
     },
 ]

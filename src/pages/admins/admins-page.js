@@ -26,7 +26,7 @@ import {green, grey, red} from "@mui/material/colors";
 import {selectAdmin} from "../../redux/admins/admin-reducer";
 import User from "../../components/shared/user";
 import {useNavigate} from "react-router";
-import InviteAdminDialog from "../../components/dialogs/new/add-invitation-dialog";
+import InviteAdminDialog from "../../components/dialogs/new/admin-invitation-dialog";
 
 const AdminsPage = () => {
 
@@ -213,7 +213,7 @@ const AdminsPage = () => {
                                                 <TableCell
                                                     align="center">{renderStatus(admin.accountStatus.status)}</TableCell>
                                                 <TableCell align="center">
-                                                    {moment(admin.modifiedAt).fromNow()}
+                                                    {moment(admin.updatedAt).fromNow()}
                                                 </TableCell>
                                                 <TableCell>
                                                     <Grid
@@ -223,12 +223,16 @@ const AdminsPage = () => {
                                                         spacing={1}>
                                                         <Grid item={true}>
                                                             <Visibility
+                                                                onClick={() => navigate(`/admins/${admin._id}/detail`)}
+                                                                sx={{pointer: 'cursor'}}
                                                                 fontSize="small"
                                                                 color="primary"
                                                             />
                                                         </Grid>
                                                         <Grid item={true}>
                                                             <Edit
+                                                                onClick={() => navigate(`/admins/${admin._id}/update`)}
+                                                                sx={{pointer: 'cursor'}}
                                                                 fontSize="small"
                                                                 color="primary"
                                                             />

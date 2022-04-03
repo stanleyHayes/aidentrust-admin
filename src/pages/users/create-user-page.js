@@ -224,8 +224,8 @@ const CreateUserPage = () => {
                                         required={true}
                                         variant="outlined"
                                         value={emergencyPhone}
-                                        error={Boolean(error.emergencyPhone)}
-                                        helperText={error.emergencyPhone}
+                                        error={Boolean(error.emergencyPhoneNumber)}
+                                        helperText={error.emergencyPhoneNumber}
                                         type="tel"
                                         size="small"
                                         onChange={handleChange}

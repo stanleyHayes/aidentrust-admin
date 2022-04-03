@@ -23,6 +23,10 @@ import ChangePasswordPage from "./pages/account/change-password-page";
 import RequestPage from "./pages/funds/request-page";
 import CreateUserPage from "./pages/users/create-user-page";
 import CreateAdminPage from "./pages/admins/create-admin-page";
+import UpdateAdminPage from "./pages/admins/update-admin-page";
+import UpdateUserPage from "./pages/users/update-user-page";
+import UserDetailPage from "./pages/users/user-detail-page";
+import AdminDetailPage from "./pages/admins/admin-detail-page";
 
 function App() {
 
@@ -63,7 +67,15 @@ function App() {
 
                 <Route element={<CreateUserPage/>} path="/new/user"/>
 
+                <Route element={<UpdateUserPage/>} path="/users/:userID/update"/>
+
+                <Route element={<UserDetailPage/>} path="/users/:userID/detail"/>
+
                 <Route element={<CreateAdminPage/>} path="/new/admin"/>
+
+                <Route element={<UpdateAdminPage/>} path="/admins/:adminID/update"/>
+
+                <Route element={<AdminDetailPage/>} path="/admins/:adminID/detail"/>
 
                 <Route element={<ForgotPasswordPage/>} path="/auth/forgot-password"/>
 
