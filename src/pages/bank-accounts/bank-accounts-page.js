@@ -25,6 +25,7 @@ import {Edit, Visibility} from "@mui/icons-material";
 import {green, grey, red} from "@mui/material/colors";
 import User from "../../components/shared/user";
 import {selectBankAccount} from "../../redux/bank-accounts/bank-account-reducer";
+import AddBankDialog from "../../components/dialogs/add-bank-dialog";
 
 const BankAccountsPage = () => {
 
@@ -41,6 +42,7 @@ const BankAccountsPage = () => {
     const classes = useStyles();
 
     const [query, setQuery] = useState("");
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     const renderStatus = status => {
         switch (status) {
@@ -116,7 +118,6 @@ const BankAccountsPage = () => {
                                     value={query}
                                     type="email"
                                     size="small"
-                                    defaultValue=""
                                     onChange={event => setQuery(event.target.value)}
                                 />
                             </Grid>
@@ -138,6 +139,7 @@ const BankAccountsPage = () => {
                     </Grid>
                     <Grid item={true} xs={12} md={2}>
                         <Button
+                            onClick={() => setDialogOpen(true)}
                             disableElevation={true}
                             size="medium"
                             color="primary"
@@ -244,6 +246,12 @@ const BankAccountsPage = () => {
                         </Box>
                     )
                 }
+                {dialogOpen && (
+                    <AddBankDialog
+                        handleClose={() => setDialogOpen(false)}
+                        open={dialogOpen}
+                    />
+                )}
             </Container>
         </Layout>
     )
