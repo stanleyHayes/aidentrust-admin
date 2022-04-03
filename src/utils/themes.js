@@ -5,7 +5,7 @@ const lightTheme = createTheme({
         borderRadius: 0
     },
     typography: {
-        fontFamily: 'Chakra Petch, Raleway, Quicksand, IBM Plex Mono,Raleway, Spartan, Inconsolata, Quicksand, IBM Plex Sans, IBM Plex Serif, Nunito'
+        fontFamily: 'Nunito Chakra Petch, Raleway, Quicksand, IBM Plex Mono,Raleway, Spartan, Quicksand, IBM Plex Sans, IBM Plex Serif, Nunito'
     },
     palette: {
         mode: "light",
@@ -41,7 +41,7 @@ const darkTheme = createTheme({
         borderRadius: 0
     },
     typography: {
-        fontFamily: 'Chakra Petch, Raleway, Quicksand, IBM Plex Mono, Spartan, Inconsolata, Chakra Petch, IBM Plex Sans, IBM Plex Serif, Nunito'
+        fontFamily: 'Nunito, Chakra Petch, Raleway, Quicksand, IBM Plex Mono, Spartan, Inconsolata, Chakra Petch, IBM Plex Sans, IBM Plex Serif, Nunito'
     },
     palette: {
         mode: "dark",

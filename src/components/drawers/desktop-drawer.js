@@ -33,6 +33,7 @@ const DesktopDrawer = () => {
                 </Stack>
                 <Divider orientation="horizontal" light={true} variant="middle"/>
                 <Stack
+                    spacing={0.5}
                     divider={<Divider orientation="horizontal" light={true} variant="middle"/>}
                     mt={2} direction="column">
                     <SidebarLink
@@ -126,6 +127,7 @@ const DesktopDrawer = () => {
 
             <Box sx={{pb: 4}}>
                 <Stack
+                    spacing={0.5}
                     divider={<Divider orientation="horizontal" light={true} variant="middle"/>}
                     mt={2} direction="column">
                     <SidebarLink

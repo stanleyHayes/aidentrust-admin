@@ -14,8 +14,8 @@ import {
 } from "@mui/material";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {selectUser} from "../../redux/users/users-reducer";
-import User from "../shared/user";
+import {selectUser} from "../../../redux/users/users-reducer";
+import User from "../../shared/user";
 
 const AddBankDialog = ({open, handleClose}) => {
 
@@ -66,8 +66,6 @@ const AddBankDialog = ({open, handleClose}) => {
                         onInputChange={event => setSearchQuery(event.target.value)}
                         autoComplete={true}
                         limitTags={5}
-                        // filterSelectedOptions={true}
-                        // filterOptions={handleFilteredUsers}
                         noOptionsText={<Typography variant="body2">No users found</Typography>}
                         loading={userLoading}
                         loadingText={<Typography variant="body2">Loading users</Typography>}

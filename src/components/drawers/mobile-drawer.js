@@ -36,7 +36,7 @@ const MobileDrawer = () => {
                     divider={<Divider orientation="horizontal" light={true} variant="middle"/>}
                     mt={2}
                     direction="column"
-                    spacing={1}>
+                    spacing={1.5}>
                     <SidebarLink
                         icon={
                             pathname === '/' ?

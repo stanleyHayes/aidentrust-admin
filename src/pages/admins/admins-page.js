@@ -25,6 +25,8 @@ import {Edit, Visibility} from "@mui/icons-material";
 import {green, grey, red} from "@mui/material/colors";
 import {selectAdmin} from "../../redux/admins/admin-reducer";
 import User from "../../components/shared/user";
+import {useNavigate} from "react-router";
+import InviteAdminDialog from "../../components/dialogs/new/add-invitation-dialog";
 
 const AdminsPage = () => {
 
@@ -38,8 +40,9 @@ const AdminsPage = () => {
     });
 
     const {admins, adminError, adminLoading} = useSelector(selectAdmin);
+    const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
     const classes = useStyles();
-
+    const navigate = useNavigate();
     const [query, setQuery] = useState("");
 
     const renderStatus = status => {
@@ -94,7 +97,8 @@ const AdminsPage = () => {
                     )
                 }
 
-                <Grid sx={{my: 4, mt: 8}} container={true} justifyContent="space-between" spacing={2} alignItems="center">
+                <Grid sx={{my: 4, mt: {xs: 8, md: 4}}} container={true} justifyContent="space-between" spacing={2}
+                      alignItems="center">
                     <Grid item={true} xs={12} md={3}>
                         <Typography variant="h4">
                             Admins ({admins && admins.length})
@@ -141,6 +145,7 @@ const AdminsPage = () => {
                         <Grid container={true} spacing={2}>
                             <Grid item={true} md={6} xs={12}>
                                 <Button
+                                    onClick={() => setInviteDialogOpen(true)}
                                     disableElevation={true}
                                     size="medium"
                                     color="primary"
@@ -149,13 +154,14 @@ const AdminsPage = () => {
                                         color: 'primary.main',
                                         textTransform: 'capitalize',
                                         fontWeight: 'bold'
-                                }}
+                                    }}
                                     variant="outlined">
                                     Invite
                                 </Button>
                             </Grid>
-                            <Grid item={true}  md={6} xs={12}>
+                            <Grid item={true} md={6} xs={12}>
                                 <Button
+                                    onClick={() => navigate('/new/admin')}
                                     disableElevation={true}
                                     size="medium"
                                     color="primary"
@@ -262,6 +268,15 @@ const AdminsPage = () => {
                                 </Table>
                             </TableContainer>
                         </Box>
+                    )
+                }
+
+                {
+                    inviteDialogOpen && (
+                        <InviteAdminDialog
+                            open={inviteDialogOpen}
+                            handleClose={() => setInviteDialogOpen(false)}
+                        />
                     )
                 }
             </Container>

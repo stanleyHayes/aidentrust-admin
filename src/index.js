@@ -9,6 +9,9 @@ import {BrowserRouter} from "react-router-dom";
 import {ThemeProvider} from "@mui/material/styles";
 import {CONSTANTS} from "./constants/constants";
 import {THEMES} from "./utils/themes";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import {LocalizationProvider} from "@mui/lab";
+
 
 const variant = localStorage.getItem(CONSTANTS.THEME_VARIANT_KEY) ? JSON.parse(localStorage.getItem(CONSTANTS.THEME_VARIANT_KEY)) : 'dark';
 
@@ -17,7 +20,9 @@ ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
                 <ThemeProvider theme={variant === 'light' ? THEMES.darkTheme : THEMES.lightTheme}>
-                    <App/>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <App/>
+                    </LocalizationProvider>
                 </ThemeProvider>
             </Provider>
         </BrowserRouter>

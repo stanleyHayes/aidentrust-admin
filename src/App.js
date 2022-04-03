@@ -21,6 +21,8 @@ import ForgotPasswordPage from "./pages/authentication/forgot-password-page";
 import ResetPasswordPage from "./pages/authentication/reset-password-page";
 import ChangePasswordPage from "./pages/account/change-password-page";
 import RequestPage from "./pages/funds/request-page";
+import CreateUserPage from "./pages/users/create-user-page";
+import CreateAdminPage from "./pages/admins/create-admin-page";
 
 function App() {
 
@@ -58,6 +60,10 @@ function App() {
                 <Route element={<RequestPage/>} path="/requests"/>
 
                 <Route element={<LoginPage/>} path="/auth/login"/>
+
+                <Route element={<CreateUserPage/>} path="/new/user"/>
+
+                <Route element={<CreateAdminPage/>} path="/new/admin"/>
 
                 <Route element={<ForgotPasswordPage/>} path="/auth/forgot-password"/>
 

@@ -25,6 +25,7 @@ import {Edit, Visibility} from "@mui/icons-material";
 import {green, grey, purple, red} from "@mui/material/colors";
 import User from "../../components/shared/user";
 import {selectInvitation} from "../../redux/invitations/invitation-reducer";
+import InviteAdminDialog from "../../components/dialogs/new/add-invitation-dialog";
 
 const InvitationsPage = () => {
 
@@ -36,6 +37,8 @@ const InvitationsPage = () => {
             }
         }
     });
+
+    const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
 
     const {invitations, invitationError, invitationLoading} = useSelector(selectInvitation);
     const classes = useStyles();
@@ -149,6 +152,7 @@ const InvitationsPage = () => {
                     </Grid>
                     <Grid item={true} xs={12} md={3}>
                         <Button
+                            onClick={() => setInviteDialogOpen(true)}
                             disableElevation={true}
                             size="medium"
                             color="secondary"
@@ -157,7 +161,7 @@ const InvitationsPage = () => {
                                 color: 'black',
                                 textTransform: 'capitalize',
                                 fontWeight: 'bold',
-                        }}
+                            }}
                             variant="contained">
                             Invite
                         </Button>
@@ -253,6 +257,15 @@ const InvitationsPage = () => {
                                 </Table>
                             </TableContainer>
                         </Box>
+                    )
+                }
+
+                {
+                    inviteDialogOpen && (
+                        <InviteAdminDialog
+                            open={inviteDialogOpen}
+                            handleClose={() => setInviteDialogOpen(false)}
+                        />
                     )
                 }
             </Container>

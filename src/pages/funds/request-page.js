@@ -152,7 +152,7 @@ const RequestsPage = () => {
                                             </TableCell>
                                             <TableCell align="center">${request.balance}</TableCell>
                                             <TableCell align="center">{request.accountNumber}</TableCell>
-                                            <TableCell align="center">${request.email}</TableCell>
+                                            <TableCell align="center">{request.email}</TableCell>
                                             <TableCell align="center">{request.transactionID}</TableCell>
                                             <TableCell align="center">{renderStatus(request.status)}</TableCell>
                                             <TableCell align="center">
@@ -193,7 +193,7 @@ const RequestsPage = () => {
                                 No Transactions available
                             </Typography>
                             <TableContainer component={Paper} elevation={1}>
-                                <Table sx={{minWidth: 650}} aria-label="transactions table">
+                                <Table aria-label="requests table">
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align="center">#</TableCell>

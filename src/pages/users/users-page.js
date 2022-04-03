@@ -25,6 +25,7 @@ import {Edit, Visibility} from "@mui/icons-material";
 import {green, grey, red} from "@mui/material/colors";
 import User from "../../components/shared/user";
 import {selectUser} from "../../redux/users/users-reducer";
+import {useNavigate} from "react-router";
 
 const UsersPage = () => {
 
@@ -41,6 +42,7 @@ const UsersPage = () => {
     const classes = useStyles();
 
     const [query, setQuery] = useState("");
+    const navigate = useNavigate();
 
     const renderStatus = status => {
         switch (status) {
@@ -161,6 +163,7 @@ const UsersPage = () => {
                             </Grid>
                             <Grid item={true} xs={12} md={6}>
                                 <Button
+                                    onClick={() => navigate('/new/user')}
                                     disableElevation={true}
                                     size="medium"
                                     color="primary"

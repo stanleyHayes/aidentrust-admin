@@ -25,7 +25,8 @@ import {Edit, Visibility} from "@mui/icons-material";
 import {green, grey, red} from "@mui/material/colors";
 import User from "../../components/shared/user";
 import {selectBankAccount} from "../../redux/bank-accounts/bank-account-reducer";
-import AddBankDialog from "../../components/dialogs/add-bank-dialog";
+import AddBankDialog from "../../components/dialogs/new/add-bank-dialog";
+import ViewBankAccountDetailDialog from "../../components/dialogs/view/view-bank-account-detail-dialog";
 
 const BankAccountsPage = () => {
 
@@ -43,7 +44,13 @@ const BankAccountsPage = () => {
 
     const [query, setQuery] = useState("");
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [selectedBankAccount, setSelectedBankAccount] = useState(false);
+    const [viewBankAccountDialogOpen, setViewBankAccountDialogOpen] = useState(false);
 
+    const handleSelectedBankAccount = bankAccount => {
+        setSelectedBankAccount(bankAccount);
+        setViewBankAccountDialogOpen(true)
+    }
     const renderStatus = status => {
         switch (status) {
             case 'Pending':
@@ -199,6 +206,8 @@ const BankAccountsPage = () => {
                                                         spacing={1}>
                                                         <Grid item={true}>
                                                             <Visibility
+                                                                sx={{cursor: 'pointer'}}
+                                                                onClick={() => handleSelectedBankAccount(bankAccount)}
                                                                 fontSize="small"
                                                                 color="primary"
                                                             />
@@ -250,6 +259,17 @@ const BankAccountsPage = () => {
                     <AddBankDialog
                         handleClose={() => setDialogOpen(false)}
                         open={dialogOpen}
+                    />
+                )}
+
+                {viewBankAccountDialogOpen && selectedBankAccount && (
+                    <ViewBankAccountDetailDialog
+                        bankAccount={selectedBankAccount}
+                        handleClose={() => {
+                            setSelectedBankAccount(null);
+                            setViewBankAccountDialogOpen(false);
+                        }}
+                        open={viewBankAccountDialogOpen}
                     />
                 )}
             </Container>

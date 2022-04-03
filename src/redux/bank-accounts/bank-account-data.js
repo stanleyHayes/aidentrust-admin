@@ -3,7 +3,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -15,7 +17,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -27,7 +31,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -39,7 +45,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -51,7 +59,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -63,7 +73,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -75,7 +87,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -87,7 +101,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -99,7 +115,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
@@ -111,7 +129,9 @@ export const bankAccounts = [
         user: {
             firstName: 'Stanley',
             lastName: 'Hayford',
-            image: ''
+            image: '',
+            email: 'hayfordstanley@gmail.com.com',
+            phoneNumber: '+233270048319'
         },
         number: '2222222222',
         balance: 120000,
