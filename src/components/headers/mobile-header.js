@@ -25,7 +25,7 @@ const MobileHeader = () => {
                     <Menu
                         sx={{
                             color: 'secondary.main',
-                            borderWidth: 1,
+                            borderWidth: 2,
                             borderStyle: 'solid',
                             borderRadius: 1.2,
                             p: 0.2
