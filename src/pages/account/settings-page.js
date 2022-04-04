@@ -70,7 +70,6 @@ const SettingsPage = () => {
         setPasswords({...user, [event.target.name]: event.target.value});
     }
 
-    console.log(gender, 'gender');
     return (
         <Layout>
             <Container className={classes.container}>
@@ -114,6 +113,7 @@ const SettingsPage = () => {
                                         helperText={error.firstName}
                                         type="text"
                                         size="small"
+                                        placeholder="Enter first name"
                                         onChange={handleUserChange}
                                     />
 
@@ -128,6 +128,7 @@ const SettingsPage = () => {
                                         helperText={error.lastName}
                                         type="text"
                                         size="small"
+                                        placeholder="Enter last name"
                                         onChange={handleUserChange}
                                     />
 
@@ -189,6 +190,7 @@ const SettingsPage = () => {
                                         helperText={error.phoneNumber}
                                         type="tel"
                                         size="small"
+                                        placeholder="Enter phone number"
                                         onChange={handleUserChange}
                                     />
 
@@ -254,6 +256,7 @@ const SettingsPage = () => {
                                             name="confirmPassword"
                                             required={true}
                                             variant="outlined"
+                                            placeholder="Enter current password"
                                             error={Boolean(error.currentPassword)}
                                             helperText={error.currentPassword}
                                             type={visiblePassword ? 'text' : 'password'}
@@ -312,6 +315,7 @@ const SettingsPage = () => {
                                             fullWidth={true}
                                             name="confirmPassword"
                                             required={true}
+                                            placeholder="Confirm password"
                                             variant="outlined"
                                             error={Boolean(error.confirmPassword)}
                                             helperText={error.confirmPassword}

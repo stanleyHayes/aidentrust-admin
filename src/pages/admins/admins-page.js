@@ -120,7 +120,6 @@ const AdminsPage = () => {
                                     value={query}
                                     type="email"
                                     size="small"
-                                    defaultValue=""
                                     onChange={event => setQuery(event.target.value)}
                                 />
                             </Grid>

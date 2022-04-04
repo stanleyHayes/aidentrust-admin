@@ -125,8 +125,8 @@ const UsersPage = () => {
                                     variant="outlined"
                                     value={query}
                                     type="email"
+                                    placeholder="Enter first name, last name, email, username"
                                     size="small"
-                                    defaultValue=""
                                     onChange={event => setQuery(event.target.value)}
                                 />
                             </Grid>

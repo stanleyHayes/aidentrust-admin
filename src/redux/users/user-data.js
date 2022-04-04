@@ -7,7 +7,7 @@ export const users = [
         image: '',
         username: 'sahayford',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -21,7 +21,7 @@ export const users = [
         image: '',
         username: 'zeus',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -35,7 +35,7 @@ export const users = [
         image: '',
         username: 'setepenre',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -49,7 +49,7 @@ export const users = [
         image: '',
         username: 'captaino',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -63,7 +63,7 @@ export const users = [
         image: '',
         username: 'fuhrer',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -77,7 +77,7 @@ export const users = [
         image: '',
         username: 'usermaatre',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -91,7 +91,7 @@ export const users = [
         image: '',
         username: 'asad',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -105,7 +105,7 @@ export const users = [
         image: '',
         username: 'notorious',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -119,7 +119,7 @@ export const users = [
         image: '',
         username: 'bigee',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },
@@ -133,7 +133,7 @@ export const users = [
         image: '',
         username: 'akosuabroni',
         gender: 'Male',
-        phone: '+233555180048',
+        phoneNumber: '+233555180048',
         accountStatus: {
             status: 'Active'
         },

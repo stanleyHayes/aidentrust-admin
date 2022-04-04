@@ -21,6 +21,12 @@ const openDrawer = () => {
     }
 }
 
-const UI_ACTION_CREATORS = {changeURL, closeDrawer, openDrawer};
+const toggleTheme = () => {
+    return {
+        type: UI_ACTION_TYPES.TOGGLE_THEME
+    }
+}
+
+const UI_ACTION_CREATORS = {changeURL, closeDrawer, openDrawer, toggleTheme};
 
 export default UI_ACTION_CREATORS;

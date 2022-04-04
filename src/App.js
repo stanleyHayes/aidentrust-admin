@@ -13,8 +13,8 @@ import AdminsPage from "./pages/admins/admins-page";
 import FundsPage from "./pages/funds/funds-page";
 import SettingsPage from "./pages/account/settings-page";
 import ProfilePage from "./pages/account/profile-page";
-import {useEffect} from "react";
-import {useDispatch} from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import UI_ACTION_CREATORS from "./redux/ui/ui-action-creators";
 import LoginPage from "./pages/authentication/login-page";
 import ForgotPasswordPage from "./pages/authentication/forgot-password-page";
@@ -27,13 +27,14 @@ import UpdateAdminPage from "./pages/admins/update-admin-page";
 import UpdateUserPage from "./pages/users/update-user-page";
 import UserDetailPage from "./pages/users/user-detail-page";
 import AdminDetailPage from "./pages/admins/admin-detail-page";
+import {selectUI} from "./redux/ui/ui-reducer";
+import {CssBaseline} from "@mui/material";
 
 function App() {
 
-    const variant = localStorage.getItem(CONSTANTS.THEME_VARIANT_KEY) ? JSON.parse(localStorage.getItem(CONSTANTS.THEME_VARIANT_KEY)) : 'dark';
-
     const dispatch = useDispatch();
     const {pathname} = useLocation();
+    const {themeVariant} = useSelector(selectUI);
 
     useEffect(() => {
         if (pathname)
@@ -41,7 +42,8 @@ function App() {
     }, [dispatch, pathname]);
 
     return (
-        <ThemeProvider theme={variant === 'light' ? THEMES.darkTheme : THEMES.lightTheme}>
+        <ThemeProvider theme={themeVariant === 'light' ? THEMES.lightTheme : THEMES.darkTheme}>
+            <CssBaseline/>
             <Routes>
                 <Route element={<DashboardPage/>} path="/"/>
 

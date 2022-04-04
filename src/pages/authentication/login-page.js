@@ -84,9 +84,8 @@ const LoginPage = () => {
                     justifyContent: 'center'
                 }}>
                 <Container maxWidth="sm" sx={{my: 3}}>
-
                     <Typography
-                        sx={{color: 'primary.main', fontWeight: 'bold'}}
+                        sx={{color: 'primary.main', fontWeight: 'bold', textTransform: 'uppercase'}}
                         gutterBottom={true}
                         align="center"
                         variant="h3">
@@ -106,6 +105,7 @@ const LoginPage = () => {
                             error={Boolean(error.email)}
                             helperText={error.email}
                             type="email"
+                            placeholder="Enter email"
                             size="medium"
                             onChange={handleChange}
                         />
@@ -142,6 +142,7 @@ const LoginPage = () => {
                                 fullWidth={true}
                                 name="password"
                                 required={true}
+                                placeholder="Enter password"
                                 variant="outlined"
                                 error={Boolean(error.password)}
                                 helperText={error.password}

@@ -7,6 +7,7 @@ import {selectDashboard} from "../../redux/dashboard/dashboard-reducer";
 import Stat from "../../components/shared/stat";
 import {Cancel, CheckCircle, Close, HourglassBottom} from "@mui/icons-material";
 import {green, grey, purple, red} from "@mui/material/colors";
+import Feint from "../../components/shared/feint";
 
 const DashboardPage = () => {
 
@@ -14,6 +15,12 @@ const DashboardPage = () => {
         return {
             container: {
                 paddingBottom: 32
+            },
+            title: {
+                color: theme.palette.text.primary
+            },
+            subtitle: {
+                color: theme.palette.text.secondary
             }
         }
     });
@@ -43,7 +50,7 @@ const DashboardPage = () => {
                     spacing={2}
                     alignItems="center">
                     <Grid item={true} xs={12} md={4}>
-                        <Typography variant="h4">
+                        <Typography className={classes.title} variant="h4">
                             Dashboard
                         </Typography>
                     </Grid>
@@ -52,7 +59,7 @@ const DashboardPage = () => {
                 <Divider light={true} variant="fullWidth" sx={{my: 4}}/>
 
                 <Box my={4} spacing={2} direction="column">
-                    <Typography variant="h5">
+                    <Typography className={classes.subtitle} variant="h5">
                         Bank Accounts ({dashboard && dashboard.bankAccount.total})
                     </Typography>
                     <Divider
@@ -65,27 +72,56 @@ const DashboardPage = () => {
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="green"
                                     title="Active"
                                     value={dashboard.bankAccount.active}
-                                    icon={<CheckCircle sx={{color: green[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="green"
+                                            children={
+                                                <CheckCircle
+                                                    sx={{color: green[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="grey"
                                     title="Pending"
                                     value={dashboard.bankAccount.pending}
-                                    icon={<HourglassBottom sx={{color: grey[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="grey"
+                                            children={
+                                                <HourglassBottom
+                                                    sx={{color: grey[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>}
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="red"
                                     title="Suspended"
                                     value={dashboard.bankAccount.suspended}
-                                    icon={<Cancel sx={{color: red[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="red"
+                                            children={
+                                                <Cancel
+                                                    sx={{color: red[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
@@ -93,7 +129,9 @@ const DashboardPage = () => {
                 </Box>
 
                 <Box my={4} spacing={2} direction="column">
-                    <Typography variant="h5">Transactions ({dashboard.transaction.total})</Typography>
+                    <Typography className={classes.subtitle} variant="h5">
+                        Transactions ({dashboard.transaction.total})
+                    </Typography>
                     <Divider
                         variant="fullWidth"
                         orientation="horizontal"
@@ -104,27 +142,56 @@ const DashboardPage = () => {
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="green"
                                     title="Active"
                                     value={dashboard.transaction.success}
-                                    icon={<CheckCircle sx={{color: green[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="green"
+                                            children={
+                                                <CheckCircle
+                                                    sx={{color: green[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="grey"
                                     title="Pending"
                                     value={dashboard.transaction.pending}
-                                    icon={<HourglassBottom sx={{color: grey[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="grey"
+                                            children={
+                                                <HourglassBottom
+                                                    sx={{color: grey[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>}
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="red"
                                     title="Failed"
                                     value={dashboard.transaction.failed}
-                                    icon={<Cancel sx={{color: red[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="red"
+                                            children={
+                                                <Cancel
+                                                    sx={{color: red[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
@@ -133,7 +200,9 @@ const DashboardPage = () => {
 
 
                 <Box my={4} spacing={2} direction="column">
-                    <Typography variant="h5">Requests ({dashboard && dashboard.request.total})</Typography>
+                    <Typography className={classes.subtitle} variant="h5">
+                        Requests ({dashboard && dashboard.request.total})
+                    </Typography>
                     <Divider
                         variant="fullWidth"
                         orientation="horizontal"
@@ -144,27 +213,56 @@ const DashboardPage = () => {
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="green"
                                     title="Confirmed"
                                     value={dashboard.request.confirmed}
-                                    icon={<CheckCircle sx={{color: green[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="green"
+                                            children={
+                                                <CheckCircle
+                                                    sx={{color: green[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="grey"
                                     title="Pending"
                                     value={dashboard.request.pending}
-                                    icon={<HourglassBottom sx={{color: grey[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="grey"
+                                            children={
+                                                <HourglassBottom
+                                                    sx={{color: grey[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>}
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="red"
                                     title="rejected"
                                     value={dashboard.request.rejected}
-                                    icon={<Cancel sx={{color: red[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="red"
+                                            children={
+                                                <Cancel
+                                                    sx={{color: red[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
@@ -172,7 +270,9 @@ const DashboardPage = () => {
                 </Box>
 
                 <Box my={4} spacing={2} direction="column">
-                    <Typography variant="h5">Users ({dashboard && dashboard.user.total})</Typography>
+                    <Typography className={classes.subtitle} variant="h5">
+                        Users ({dashboard && dashboard.user.total})
+                    </Typography>
                     <Divider
                         variant="fullWidth"
                         orientation="horizontal"
@@ -183,27 +283,56 @@ const DashboardPage = () => {
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="green"
                                     title="Active"
                                     value={dashboard.user.active}
-                                    icon={<CheckCircle sx={{color: green[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="green"
+                                            children={
+                                                <CheckCircle
+                                                    sx={{color: green[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="grey"
                                     title="Pending"
                                     value={dashboard.user.pending}
-                                    icon={<HourglassBottom sx={{color: grey[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="grey"
+                                            children={
+                                                <HourglassBottom
+                                                    sx={{color: grey[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>}
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="red"
                                     title="Suspended"
                                     value={dashboard.user.suspended}
-                                    icon={<Cancel sx={{color: red[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="red"
+                                            children={
+                                                <Cancel
+                                                    sx={{color: red[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
@@ -212,7 +341,9 @@ const DashboardPage = () => {
 
 
                 <Box my={4} spacing={2} direction="column">
-                    <Typography variant="h5">Admins ({dashboard && dashboard.admin.total})</Typography>
+                    <Typography className={classes.subtitle} variant="h5">
+                        Admins ({dashboard && dashboard.admin.total})
+                    </Typography>
                     <Divider
                         variant="fullWidth"
                         orientation="horizontal"
@@ -223,27 +354,56 @@ const DashboardPage = () => {
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="green"
                                     title="Active"
                                     value={dashboard.admin.active}
-                                    icon={<CheckCircle sx={{color: green[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="green"
+                                            children={
+                                                <CheckCircle
+                                                    sx={{color: green[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="grey"
                                     title="Pending"
                                     value={dashboard.admin.pending}
-                                    icon={<HourglassBottom sx={{color: grey[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="grey"
+                                            children={
+                                                <HourglassBottom
+                                                    sx={{color: grey[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>}
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="red"
                                     title="Suspended"
                                     value={dashboard.admin.suspended}
-                                    icon={<Cancel sx={{color: red[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="red"
+                                            children={
+                                                <Cancel
+                                                    sx={{color: red[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
@@ -251,7 +411,9 @@ const DashboardPage = () => {
                 </Box>
 
                 <Box my={4} spacing={2} direction="column">
-                    <Typography variant="h5">Funds ({dashboard && dashboard.fund.total})</Typography>
+                    <Typography className={classes.subtitle} variant="h5">
+                        Funds ({dashboard && dashboard.fund.total})
+                    </Typography>
                     <Divider
                         variant="fullWidth"
                         orientation="horizontal"
@@ -262,27 +424,56 @@ const DashboardPage = () => {
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="green"
                                     title="Confirmed"
                                     value={dashboard.fund.confirmed}
-                                    icon={<CheckCircle sx={{color: green[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="green"
+                                            children={
+                                                <CheckCircle
+                                                    sx={{color: green[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="grey"
                                     title="Pending"
                                     value={dashboard.fund.pending}
-                                    icon={<HourglassBottom sx={{color: grey[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="grey"
+                                            children={
+                                                <HourglassBottom
+                                                    sx={{color: grey[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>}
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={4}>
                             {dashboard && (
                                 <Stat
+                                    color="red"
                                     title="Rejected"
                                     value={dashboard.fund.rejected}
-                                    icon={<Cancel sx={{color: red[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="red"
+                                            children={
+                                                <Cancel
+                                                    sx={{color: red[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
@@ -291,7 +482,7 @@ const DashboardPage = () => {
 
 
                 <Box my={4} spacing={2} direction="column">
-                    <Typography variant="h5">
+                    <Typography className={classes.subtitle} variant="h5">
                         Invitations ({dashboard && dashboard.invitation.total})
                     </Typography>
                     <Divider
@@ -304,36 +495,75 @@ const DashboardPage = () => {
                         <Grid item={true} xs={12} md={3}>
                             {dashboard && (
                                 <Stat
+                                    color="green"
                                     title="Accepted"
                                     value={dashboard.invitation.accepted}
-                                    icon={<CheckCircle sx={{color: green[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="green"
+                                            children={
+                                                <CheckCircle
+                                                    sx={{color: green[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={3}>
                             {dashboard && (
                                 <Stat
+                                    color="grey"
                                     title="Pending"
                                     value={dashboard.invitation.pending}
-                                    icon={<HourglassBottom sx={{color: grey[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="grey"
+                                            children={
+                                                <HourglassBottom
+                                                    sx={{color: grey[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>}
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={3}>
                             {dashboard && (
                                 <Stat
+                                    color="red"
                                     title="Expired"
                                     value={dashboard.invitation.expired}
-                                    icon={<Cancel sx={{color: red[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="red"
+                                            children={
+                                                <Cancel
+                                                    sx={{color: red[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>
                         <Grid item={true} xs={12} md={3}>
                             {dashboard && (
                                 <Stat
+                                    color="purple"
                                     title="Revoked"
                                     value={dashboard.invitation.revoked}
-                                    icon={<Close sx={{color: purple[600]}} fontSize="large"/>}
+                                    icon={
+                                        <Feint
+                                            color="purple"
+                                            children={
+                                                <Close
+                                                    sx={{color: purple[500]}}
+                                                    fontSize="large"
+                                                />
+                                            }/>
+                                    }
                                 />
                             )}
                         </Grid>

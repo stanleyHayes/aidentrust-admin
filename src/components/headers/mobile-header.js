@@ -25,9 +25,9 @@ const MobileHeader = () => {
                     <Menu
                         sx={{
                             color: 'secondary.main',
-                            borderWidth: 2,
+                            borderWidth: 1.6,
                             borderStyle: 'solid',
-                            borderRadius: 1.2,
+                            borderRadius: .2,
                             p: 0.2
                         }}
                         onClick={() => dispatch(UI_ACTION_CREATORS.openDrawer())}/>

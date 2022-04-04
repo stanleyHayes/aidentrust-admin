@@ -2,10 +2,10 @@ import {createTheme} from "@mui/material/styles";
 
 const lightTheme = createTheme({
     shape: {
-        borderRadius: 0
+        borderRadius: 32
     },
     typography: {
-        fontFamily: 'Nunito Chakra Petch, Raleway, Quicksand, IBM Plex Mono,Raleway, Spartan, Quicksand, IBM Plex Sans, IBM Plex Serif, Nunito'
+        fontFamily: ' Raleway, Nunito ,IBM Plex Mono, Spartan, Chakra Petch, Raleway, Quicksand, Raleway, Quicksand, IBM Plex Sans, IBM Plex Serif, Nunito'
     },
     palette: {
         mode: "light",
@@ -38,28 +38,28 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
     shape: {
-        borderRadius: 0
+        borderRadius: 32
     },
     typography: {
-        fontFamily: 'Nunito, Chakra Petch, Raleway, Quicksand, IBM Plex Mono, Spartan, Inconsolata, Chakra Petch, IBM Plex Sans, IBM Plex Serif, Nunito'
+        fontFamily: ' Raleway, Nunito ,Spartan, Chakra Petch, Quicksand, IBM Plex Mono, Spartan, Inconsolata, Chakra Petch, IBM Plex Sans, IBM Plex Serif, Nunito'
     },
     palette: {
         mode: "dark",
         background: {
-            default: '#000000',
-            paper: '#13132b'
+            default: '#0c0c23',
+            paper: '#1c1c3c'
         },
         primary: {
-            main: '#5D3EBC',
+            main: '#1c1c3c',
         },
         secondary: {
             main: '#FFCD31',
         },
         text: {
-            primary: '#323130',
+            primary: '#e9e9e9',
             secondary: '#909091',
-            title: '#323130',
-            light: '#909091',
+            title: '#e9e9e9',
+            light: '#e9e9e9',
             link: '#5D3EBC'
         },
         action: {
