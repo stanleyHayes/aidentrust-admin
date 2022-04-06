@@ -3,7 +3,7 @@ import SidebarLink from "../shared/sidebar-link";
 import {useLocation} from "react-router";
 import {
     AccountBalance,
-    AccountBalanceOutlined, Brightness1, Brightness5,
+    AccountBalanceOutlined,
     CompareArrows,
     CompareArrowsOutlined,
     Dashboard,
@@ -24,15 +24,10 @@ import {
 } from "@mui/icons-material";
 import {grey, purple} from "@mui/material/colors";
 import {makeStyles} from "@mui/styles";
-import {selectUI} from "../../redux/ui/ui-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import UI_ACTION_CREATORS from "../../redux/ui/ui-action-creators";
 
 const DesktopDrawer = () => {
 
     const {pathname} = useLocation();
-    const {themeVariant} = useSelector(selectUI);
-    const dispatch = useDispatch();
 
     const useStyles = makeStyles(theme => {
         return {
@@ -69,7 +64,7 @@ const DesktopDrawer = () => {
                             pl: 4,
                             fontWeight: 400,
                             fontFamily: 'Chakra Petch'
-                    }} variant="h4">
+                        }} variant="h4">
                         Aiden Trust
                     </Typography>
                 </Stack>
@@ -101,7 +96,7 @@ const DesktopDrawer = () => {
                         icon={
                             pathname === '/bank-accounts' ?
                                 <AccountBalance fontSize="large" className={classes.active}/> :
-                                <AccountBalanceOutlined fontSize="large"  className={classes.inactive}/>
+                                <AccountBalanceOutlined fontSize="large" className={classes.inactive}/>
                         }
                         path="/bank-accounts"
                         label="Bank Accounts"
@@ -191,48 +186,6 @@ const DesktopDrawer = () => {
                         label="Profile"
                         active={pathname === '/profile'}
                     />
-
-                    {themeVariant === 'dark' ? (
-                        <Button
-                            onClick={() => dispatch(UI_ACTION_CREATORS.toggleTheme())}
-                            startIcon={
-                                <Brightness5 className={classes.active}/>}
-                            sx={{
-                                fontWeight: 'bold',
-                                borderRadius: 0,
-                                justifyContent: 'flex-start',
-                                textTransform: 'capitalize',
-                                fontSize: 14,
-                                paddingLeft: 4,
-                                py: 1
-                            }}
-                            color="primary"
-                            size="medium"
-                            variant="text"
-                            fullWidth={true}>
-                            Light Mode
-                        </Button>
-                    ): (
-                        <Button
-                            onClick={() => dispatch(UI_ACTION_CREATORS.toggleTheme())}
-                            startIcon={
-                                <Brightness1 className={classes.active}/>}
-                            sx={{
-                                fontWeight: 'bold',
-                                borderRadius: 0,
-                                justifyContent: 'flex-start',
-                                textTransform: 'capitalize',
-                                fontSize: 14,
-                                paddingLeft: 4,
-                                py: 1
-                            }}
-                            color="primary"
-                            size="medium"
-                            variant="text"
-                            fullWidth={true}>
-                            Dark Mode
-                        </Button>
-                    )}
 
                     <Button
                         startIcon={

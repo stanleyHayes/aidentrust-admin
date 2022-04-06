@@ -2,7 +2,6 @@ import {Route, Routes} from "react-router-dom";
 import {useLocation} from "react-router";
 import './App.css';
 import DashboardPage from "./pages/dashboard/dashboard-page";
-import {CONSTANTS} from "./constants/constants";
 import {THEMES} from "./utils/themes";
 import {ThemeProvider} from "@mui/styles";
 import TransactionsPage from "./pages/transactions/transactions-page";
@@ -14,7 +13,7 @@ import FundsPage from "./pages/funds/funds-page";
 import SettingsPage from "./pages/account/settings-page";
 import ProfilePage from "./pages/account/profile-page";
 import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import UI_ACTION_CREATORS from "./redux/ui/ui-action-creators";
 import LoginPage from "./pages/authentication/login-page";
 import ForgotPasswordPage from "./pages/authentication/forgot-password-page";
@@ -27,14 +26,12 @@ import UpdateAdminPage from "./pages/admins/update-admin-page";
 import UpdateUserPage from "./pages/users/update-user-page";
 import UserDetailPage from "./pages/users/user-detail-page";
 import AdminDetailPage from "./pages/admins/admin-detail-page";
-import {selectUI} from "./redux/ui/ui-reducer";
 import {CssBaseline} from "@mui/material";
 
 function App() {
 
     const dispatch = useDispatch();
     const {pathname} = useLocation();
-    const {themeVariant} = useSelector(selectUI);
 
     useEffect(() => {
         if (pathname)
@@ -42,7 +39,7 @@ function App() {
     }, [dispatch, pathname]);
 
     return (
-        <ThemeProvider theme={themeVariant === 'light' ? THEMES.lightTheme : THEMES.darkTheme}>
+        <ThemeProvider theme={THEMES.lightTheme}>
             <CssBaseline/>
             <Routes>
                 <Route element={<DashboardPage/>} path="/"/>

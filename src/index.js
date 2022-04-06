@@ -13,16 +13,11 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import {LocalizationProvider} from "@mui/lab";
 import {CssBaseline} from "@mui/material";
 
-
-const themeVariant =
-    localStorage.getItem(CONSTANTS.AIDEN_TRUST_ADMIN_THEME_VARIANT_KEY) ?
-        JSON.parse(localStorage.getItem(CONSTANTS.AIDEN_TRUST_ADMIN_THEME_VARIANT_KEY)) : 'dark';
-
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
-                <ThemeProvider theme={themeVariant === 'light' ? THEMES.lightTheme : THEMES.darkTheme}>
+                <ThemeProvider theme={THEMES.lightTheme}>
                     <CssBaseline/>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <App/>
