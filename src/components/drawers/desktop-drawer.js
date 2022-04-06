@@ -39,13 +39,13 @@ const DesktopDrawer = () => {
             inactive: {
                 color: 'text.secondary',
                 backgroundColor: grey[200],
-                padding: 5,
+                padding: 0.5,
                 borderRadius: 4
             },
             active: {
                 color: 'text.link',
                 backgroundColor: purple[100],
-                padding: 5,
+                padding: 0.5,
                 borderRadius: 4
             }
         }
@@ -63,7 +63,13 @@ const DesktopDrawer = () => {
             }}>
             <Box sx={{flex: 1}}>
                 <Stack mb={2} direction="column">
-                    <Typography sx={{color: 'text.link', pl: 4, fontWeight: 'bold'}} variant="h4">
+                    <Typography
+                        sx={{
+                            color: 'text.link',
+                            pl: 4,
+                            fontWeight: 400,
+                            fontFamily: 'Chakra Petch'
+                    }} variant="h4">
                         Aiden Trust
                     </Typography>
                 </Stack>
@@ -94,8 +100,8 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/bank-accounts' ?
-                                <AccountBalance className={classes.active}/> :
-                                <AccountBalanceOutlined className={classes.inactive}/>
+                                <AccountBalance fontSize="large" className={classes.active}/> :
+                                <AccountBalanceOutlined fontSize="large"  className={classes.inactive}/>
                         }
                         path="/bank-accounts"
                         label="Bank Accounts"

@@ -24,8 +24,6 @@ const Layout = ({children}) => {
                             md: '25%',
                             lg: '15%'
                         },
-                        borderRadius: 2,
-                        mx: 4,
                         backgroundColor: 'background.paper',
                         maxHeight: '100vh',
                         display: {xs: "none", md: "block"}

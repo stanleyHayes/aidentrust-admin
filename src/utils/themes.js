@@ -2,7 +2,7 @@ import {createTheme} from "@mui/material/styles";
 
 const lightTheme = createTheme({
     shape: {
-        borderRadius: 32
+        borderRadius: 8
     },
     typography: {
         fontFamily: ' Raleway, Nunito ,IBM Plex Mono, Spartan, Chakra Petch, Raleway, Quicksand, Raleway, Quicksand, IBM Plex Sans, IBM Plex Serif, Nunito'
@@ -38,7 +38,7 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
     shape: {
-        borderRadius: 32
+        borderRadius: 8
     },
     typography: {
         fontFamily: ' Raleway, Nunito ,Spartan, Chakra Petch, Quicksand, IBM Plex Mono, Spartan, Inconsolata, Chakra Petch, IBM Plex Sans, IBM Plex Serif, Nunito'
