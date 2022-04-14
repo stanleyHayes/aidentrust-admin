@@ -19,7 +19,7 @@ import LoginPage from "./pages/authentication/login-page";
 import ForgotPasswordPage from "./pages/authentication/forgot-password-page";
 import ResetPasswordPage from "./pages/authentication/reset-password-page";
 import ChangePasswordPage from "./pages/account/change-password-page";
-import RequestPage from "./pages/funds/request-page";
+import RequestPage from "./pages/funds/requests-page";
 import CreateUserPage from "./pages/users/create-user-page";
 import CreateAdminPage from "./pages/admins/create-admin-page";
 import UpdateAdminPage from "./pages/admins/update-admin-page";

@@ -236,9 +236,6 @@ const InvitationsPage = () => {
                     invitations && invitations.length === 0 &&
                     (
                         <Box my={4}>
-                            <Typography variant="h6" align="center">
-                                No Admins available
-                            </Typography>
                             <TableContainer component={Paper} elevation={0}>
                                 <Table size="small" sx={{minWidth: 650}} aria-label="admins table">
                                     <TableHead>
@@ -255,6 +252,11 @@ const InvitationsPage = () => {
                                     </TableHead>
                                 </Table>
                             </TableContainer>
+                            <Box sx={{backgroundColor: purple[50]}} py={5}>
+                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                    No invitations available
+                                </Typography>
+                            </Box>
                         </Box>
                     )
                 }

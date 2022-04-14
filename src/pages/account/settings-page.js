@@ -112,7 +112,7 @@ const SettingsPage = () => {
                                         error={Boolean(error.firstName)}
                                         helperText={error.firstName}
                                         type="text"
-                                        size="small"
+                                        size="medium"
                                         placeholder="Enter first name"
                                         onChange={handleUserChange}
                                     />
@@ -127,7 +127,7 @@ const SettingsPage = () => {
                                         error={Boolean(error.lastName)}
                                         helperText={error.lastName}
                                         type="text"
-                                        size="small"
+                                        size="medium"
                                         placeholder="Enter last name"
                                         onChange={handleUserChange}
                                     />
@@ -141,8 +141,8 @@ const SettingsPage = () => {
                                         value={email}
                                         error={Boolean(error.email)}
                                         helperText={error.email}
-                                        type="text"
-                                        size="small"
+                                        type="email"
+                                        size="medium"
                                         placeholder="Enter email"
                                         onChange={handleUserChange}
                                     />
@@ -157,7 +157,7 @@ const SettingsPage = () => {
                                         error={Boolean(error.username)}
                                         helperText={error.username}
                                         type="text"
-                                        size="small"
+                                        size="medium"
                                         placeholder="Enter username"
                                         onChange={handleUserChange}
                                     />
@@ -189,7 +189,7 @@ const SettingsPage = () => {
                                         error={Boolean(error.phoneNumber)}
                                         helperText={error.phoneNumber}
                                         type="tel"
-                                        size="small"
+                                        size="medium"
                                         placeholder="Enter phone number"
                                         onChange={handleUserChange}
                                     />
@@ -204,7 +204,7 @@ const SettingsPage = () => {
                                         error={Boolean(error.emergencyPhoneNumber)}
                                         helperText={error.emergencyPhoneNumber}
                                         type="tel"
-                                        size="small"
+                                        size="medium"
                                         onChange={handleUserChange}
                                     />
 

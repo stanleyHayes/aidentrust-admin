@@ -24,7 +24,7 @@ import {selectTransaction} from "../../redux/transactions/transaction-reducer";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
 import {Edit, Visibility} from "@mui/icons-material";
-import {green, grey, red} from "@mui/material/colors";
+import {green, grey, purple, red} from "@mui/material/colors";
 
 const TransactionsPage = () => {
 
@@ -127,7 +127,7 @@ const TransactionsPage = () => {
                 {
                     transactions && transactions.length > 0 &&
                     <TableContainer component={Paper} elevation={0}>
-                        <Table size="small" aria-label="transactions table">
+                        <Table size="medium" aria-label="transactions table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="center">#</TableCell>
@@ -190,7 +190,7 @@ const TransactionsPage = () => {
                     (
                         <Box my={4}>
                             <TableContainer component={Paper} elevation={0}>
-                                <Table size="small" sx={{minWidth: 650}} aria-label="transactions table">
+                                <Table size="medium" sx={{minWidth: 650}} aria-label="transactions table">
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align="center">#</TableCell>
@@ -205,9 +205,11 @@ const TransactionsPage = () => {
                                     </TableHead>
                                 </Table>
                             </TableContainer>
-                            <Typography variant="h6" align="center">
-                                No Transactions available
-                            </Typography>
+                            <Box sx={{backgroundColor: purple[50]}} py={5}>
+                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                    No transactions available
+                                </Typography>
+                            </Box>
                         </Box>
                     )
                 }

@@ -17,16 +17,20 @@ import {
     Typography
 } from "@mui/material";
 import {makeStyles} from "@mui/styles";
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
 import {Edit, Visibility} from "@mui/icons-material";
-import {green, grey, red} from "@mui/material/colors";
+import {green, grey, purple, red} from "@mui/material/colors";
 import {selectAdmin} from "../../redux/admins/admin-reducer";
 import User from "../../components/shared/user";
 import {useNavigate} from "react-router";
 import InviteAdminDialog from "../../components/dialogs/new/admin-invitation-dialog";
+import {selectAuth} from "../../redux/authentication/authentication-reducer";
+import {
+    ADMIN_ACTION_CREATORS
+} from "../../redux/admins/admin-action-creators";
 
 const AdminsPage = () => {
 
@@ -81,6 +85,14 @@ const AdminsPage = () => {
                 );
         }
     }
+
+    const {token} = useSelector(selectAuth);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(ADMIN_ACTION_CREATORS.getAdmins(token));
+    }, [dispatch, token]);
+
     return (
         <Layout>
             {adminLoading && <LinearProgress color="secondary" variant="query"/>}
@@ -251,11 +263,8 @@ const AdminsPage = () => {
                     admins && admins.length === 0 &&
                     (
                         <Box my={4}>
-                            <Typography variant="h6" align="center">
-                                No Admins available
-                            </Typography>
                             <TableContainer component={Paper} elevation={0}>
-                                <Table size="small" sx={{minWidth: 650}} aria-label="admins table">
+                                <Table size="medium" sx={{minWidth: 650}} aria-label="admins table">
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align="center">#</TableCell>
@@ -270,6 +279,11 @@ const AdminsPage = () => {
                                     </TableHead>
                                 </Table>
                             </TableContainer>
+                            <Box sx={{backgroundColor: purple[50]}} py={5}>
+                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                    No admins available
+                                </Typography>
+                            </Box>
                         </Box>
                     )
                 }

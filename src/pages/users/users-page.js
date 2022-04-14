@@ -22,7 +22,7 @@ import {useSelector} from "react-redux";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
 import {Edit, Visibility} from "@mui/icons-material";
-import {green, grey, red} from "@mui/material/colors";
+import {green, grey, purple, red} from "@mui/material/colors";
 import User from "../../components/shared/user";
 import {selectUser} from "../../redux/users/users-reducer";
 import {useNavigate} from "react-router";
@@ -263,7 +263,7 @@ const UsersPage = () => {
                     (
                         <Box my={4}>
                             <TableContainer component={Paper} elevation={0}>
-                                <Table size="small" sx={{minWidth: 650}} aria-label="transactions table">
+                                <Table size="medium" sx={{minWidth: 650}} aria-label="transactions table">
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align="center">#</TableCell>
@@ -278,9 +278,11 @@ const UsersPage = () => {
                                     </TableHead>
                                 </Table>
                             </TableContainer>
-                            <Typography my={4} variant="h6" align="center">
-                                No Users available
-                            </Typography>
+                            <Box sx={{backgroundColor: purple[50]}} py={5}>
+                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                    No users available
+                                </Typography>
+                            </Box>
                         </Box>
                     )
                 }

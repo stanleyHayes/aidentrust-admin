@@ -23,7 +23,7 @@ import {useSelector} from "react-redux";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
 import {Edit, Visibility} from "@mui/icons-material";
-import {green, grey, red} from "@mui/material/colors";
+import {green, grey, purple, red} from "@mui/material/colors";
 import {selectFund} from "../../redux/funds/funds-reducer";
 
 const FundsPage = () => {
@@ -122,7 +122,7 @@ const FundsPage = () => {
 
                 {funds && funds.length > 0 &&
                     <TableContainer component={Paper} elevation={0}>
-                        <Table sx={{minWidth: 650}} size="small" aria-label="transactions table">
+                        <Table sx={{minWidth: 650}} size="medium" aria-label="transactions table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="center">#</TableCell>
@@ -181,11 +181,8 @@ const FundsPage = () => {
                     funds && funds.length === 0 &&
                     (
                         <Box my={4}>
-                            <Typography variant="h6" align="center">
-                                No Transactions available
-                            </Typography>
                             <TableContainer component={Paper} elevation={1}>
-                                <Table sx={{minWidth: 650}} aria-label="transactions table">
+                                <Table size="medium" sx={{minWidth: 650}} aria-label="transactions table">
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align="right">#</TableCell>
@@ -200,6 +197,11 @@ const FundsPage = () => {
                                     </TableHead>
                                 </Table>
                             </TableContainer>
+                            <Box sx={{backgroundColor: purple[50]}} py={5}>
+                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                    No funds available
+                                </Typography>
+                            </Box>
                         </Box>
                     )
                 }

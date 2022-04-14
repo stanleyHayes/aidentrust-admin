@@ -1,14 +1,38 @@
-import {funds} from "./funds-data";
+import {FUNDS_ACTION_TYPES} from "./funds-action-types";
 
 const INITIAL_STATE = {
-    funds: [...funds],
+    funds: [],
     fundDetail: {},
     fundLoading: false,
    fundError: false,
-    totalFunds: funds.length
+    totalFunds: 0
 }
 const fundsReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
+
+        case FUNDS_ACTION_TYPES.GET_FUNDS_REQUEST:
+            return {
+                ...state,
+                fundError: null,
+                fundLoading: true
+            }
+
+        case FUNDS_ACTION_TYPES.GET_FUNDS_SUCCESS:
+            return {
+                ...state,
+                fundError: null,
+                fundLoading: false,
+                funds: action.payload.data,
+                totalBankAccounts: action.payload.count
+            }
+
+        case FUNDS_ACTION_TYPES.GET_FUNDS_FAIL:
+            return {
+                ...state,
+                fundError: action.payload,
+                fundLoading: false
+            }
+
 
         default:
             return state;

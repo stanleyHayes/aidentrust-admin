@@ -13,15 +13,18 @@ const Feint = ({color, children}) => {
             case 'purple':
                 return purple[100];
             default:
-                return grey[100];
+                return purple[50];
         }
     }
     return (
         <Box
             sx={{
                 backgroundColor: renderColor(color),
-                padding: 0.7,
-                borderRadius: 0.4
+                padding: 0.5,
+                borderRadius: 0.4,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
             }}>
             {children}
         </Box>

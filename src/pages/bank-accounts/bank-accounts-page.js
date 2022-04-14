@@ -22,7 +22,7 @@ import {useSelector} from "react-redux";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
 import {Edit, Visibility} from "@mui/icons-material";
-import {green, grey, red} from "@mui/material/colors";
+import {green, grey, purple, red} from "@mui/material/colors";
 import User from "../../components/shared/user";
 import {selectBankAccount} from "../../redux/bank-accounts/bank-account-reducer";
 import AddBankDialog from "../../components/dialogs/new/add-bank-dialog";
@@ -233,11 +233,8 @@ const BankAccountsPage = () => {
                     bankAccounts && bankAccounts.length === 0 &&
                     (
                         <Box my={4}>
-                            <Typography variant="h6" align="center">
-                                No Bank Accounts available
-                            </Typography>
                             <TableContainer component={Paper} elevation={0}>
-                                <Table size="small" sx={{minWidth: 650}} aria-label="admins table">
+                                <Table size="medium" sx={{minWidth: 650}} aria-label="admins table">
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align="center">#</TableCell>
@@ -252,6 +249,11 @@ const BankAccountsPage = () => {
                                     </TableHead>
                                 </Table>
                             </TableContainer>
+                            <Box sx={{backgroundColor: purple[50]}} py={5}>
+                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                    No bank accounts available
+                                </Typography>
+                            </Box>
                         </Box>
                     )
                 }
