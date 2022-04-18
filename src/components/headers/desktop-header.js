@@ -80,12 +80,21 @@ const DesktopHeader = () => {
                                 onClick={handleMenuClick}
                                 endIcon={<KeyboardArrowDown color="secondary"/>}
                                 size="large" variant="text">
-                                {"Stanley Hayford"}
+                                "Stanley Hayford"
                             </Button>
-                            <Menu open={menuOpen} onClose={handleMenuClose} anchorEl={anchorEl}>
+                            <Menu
+                                elevation={1}
+                                open={menuOpen}
+                                onClose={handleMenuClose}
+                                anchorEl={anchorEl}>
                                 <MenuItem>
-                                    <Link to="/account/profile" className={classes.dropDownLink}>
-                                        <Button variant="text" size="large">Profile</Button>
+                                    <Link to="/profile" className={classes.dropDownLink}>
+                                        <Button variant="text" size="small">Profile</Button>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Link to="/change-password" className={classes.dropDownLink}>
+                                        <Button variant="text" size="small">Change Password</Button>
                                     </Link>
                                 </MenuItem>
                             </Menu>

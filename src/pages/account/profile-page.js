@@ -27,7 +27,12 @@ const ProfilePage = () => {
     return (
         <Layout>
             <Container className={classes.container}>
-                <Grid spacing={2} alignItems="center" justifyContent="space-between" container={true}>
+                <Grid
+                    sx={{mt: {xs: 8, md: 0}}}
+                    spacing={2}
+                    alignItems="center"
+                    justifyContent="space-between"
+                    container={true}>
                     <Grid item={true} xs={12} md="auto">
                         <Typography variant="h4">Profile</Typography>
                     </Grid>
@@ -37,7 +42,10 @@ const ProfilePage = () => {
                                 fontWeight: 700,
                                 textTransform: 'capitalize',
                                 color: "white",
-                                backgroundColor: "primary.main"
+                                backgroundColor: "primary.main",
+                                '&:hover':{
+                                    color: "primary.main",
+                                }
                             }}
                             startIcon={<Edit fontSize="small" sx={{color: "white"}}/>}
                             variant="outlined"

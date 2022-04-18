@@ -1,15 +1,29 @@
-import {Box, Button, Card, CardContent, Container, Grid, Stack, TextField, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Card,
+    CardContent,
+    Container,
+    FormControl,
+    Grid, IconButton, InputAdornment, InputLabel, OutlinedInput,
+    Stack,
+    TextField,
+    Typography
+} from "@mui/material";
 import {useState} from "react";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 const ChangePasswordPage = () => {
 
-    const [user, setUser] = useState({});
+    const [passwords, setPasswords] = useState({});
     const [visiblePassword, setVisiblePassword] = useState(false);
+    const [confirmVisiblePassword, setConfirmVisiblePassword] = useState(false);
+    const [currentVisiblePassword, setCurrentVisiblePassword] = useState(false);
+    const {confirmPassword, password, currentPassword} = passwords;
     const [error, setError] = useState({});
-    const {confirmPassword, password, currentPassword} = user;
 
     const handleChange = event => {
-        setUser({...user, [event.target.name]: event.target.value});
+        setPasswords({...passwords, [event.target.name]: event.target.value});
     }
 
     return (
@@ -21,65 +35,107 @@ const ChangePasswordPage = () => {
                 backgroundColor: 'background.default'
             }}>
             <Container>
-                {<Grid container={true} justifyContent="center">
+                <Grid container={true} justifyContent="center">
                     <Grid item={true} xs={12} md={6} lg={4}>
-                        <Card elevation={1} variant="elevation">
+                        <Card elevation={1}>
                             <CardContent>
-                                <Typography gutterBottom={true} align="center" variant="h4">
-                                    Aiden Trust
-                                </Typography>
-                                <Typography gutterBottom={true} align="center" variant="h6">
-                                    Reset Password
-                                </Typography>
-                                <Typography gutterBottom={true} align="center" variant="body2">
-                                    Set a strong password to protect your data
-                                </Typography>
-
+                                <Typography
+                                    align="center"
+                                    mb={4}
+                                    variant="h5">Change Password</Typography>
                                 <Stack my={3} spacing={2} direction="column">
-                                    <TextField
-                                        label="Current Password"
-                                        fullWidth={true}
-                                        name="currentPassword"
-                                        required={true}
-                                        variant="outlined"
-                                        value={currentPassword}
-                                        error={Boolean(error.currentPassword)}
-                                        helperText={error.currentPassword}
-                                        type="password"
-                                        size="medium"
-                                        defaultValue=""
-                                        onChange={handleChange}
-                                    />
+                                    <FormControl variant="outlined">
+                                        <InputLabel htmlFor="currentPassword">Current Password</InputLabel>
+                                        <OutlinedInput
+                                            id="currentPassword"
+                                            label="Current Password"
+                                            fullWidth={true}
+                                            name="confirmPassword"
+                                            required={true}
+                                            variant="outlined"
+                                            size="medium"
+                                            placeholder="Enter current password"
+                                            error={Boolean(error.currentPassword)}
+                                            helperText={error.currentPassword}
+                                            type={visiblePassword ? 'text' : 'password'}
+                                            value={currentPassword}
+                                            onChange={handleChange}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={() => setCurrentVisiblePassword(!currentVisiblePassword)}
+                                                        onMouseDown={() => setCurrentVisiblePassword(!currentVisiblePassword)}
+                                                        edge="end"
+                                                    >
+                                                        {currentVisiblePassword ? <VisibilityOff/> : <Visibility/>}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                    </FormControl>
 
-                                    <TextField
-                                        label="Password"
-                                        fullWidth={true}
-                                        name="password"
-                                        required={true}
-                                        variant="outlined"
-                                        value={password}
-                                        error={Boolean(error.password)}
-                                        helperText={error.password}
-                                        type="password"
-                                        size="medium"
-                                        defaultValue=""
-                                        onChange={handleChange}
-                                    />
+                                    <FormControl variant="outlined">
+                                        <InputLabel htmlFor="password">New Password</InputLabel>
+                                        <OutlinedInput
+                                            id="password"
+                                            label="Enter Password"
+                                            fullWidth={true}
+                                            name="password"
+                                            required={true}
+                                            size="medium"
+                                            placeholder="Enter a password"
+                                            variant="outlined"
+                                            error={Boolean(error.password)}
+                                            helperText={error.password}
+                                            type={visiblePassword ? 'text' : 'password'}
+                                            value={password}
+                                            onChange={handleChange}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={() => setVisiblePassword(!visiblePassword)}
+                                                        onMouseDown={() => setVisiblePassword(!visiblePassword)}
+                                                        edge="end"
+                                                    >
+                                                        {visiblePassword ? <VisibilityOff/> : <Visibility/>}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                    </FormControl>
 
-                                    <TextField
-                                        label="Confirm Password"
-                                        fullWidth={true}
-                                        name="confirmPassword"
-                                        required={true}
-                                        variant="outlined"
-                                        value={confirmPassword}
-                                        error={Boolean(error.confirmPassword)}
-                                        helperText={error.confirmPassword}
-                                        type="password"
-                                        size="medium"
-                                        defaultValue=""
-                                        onChange={handleChange}
-                                    />
+                                    <FormControl variant="outlined">
+                                        <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+                                        <OutlinedInput
+                                            id="confirmPassword"
+                                            label="Confirm Password"
+                                            fullWidth={true}
+                                            name="confirmPassword"
+                                            required={true}
+                                            placeholder="Confirm password"
+                                            variant="outlined"
+                                            size="medium"
+                                            error={Boolean(error.confirmPassword)}
+                                            helperText={error.confirmPassword}
+                                            type={confirmVisiblePassword ? 'text' : 'password'}
+                                            value={confirmPassword}
+                                            onChange={handleChange}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={() => setConfirmVisiblePassword(!confirmVisiblePassword)}
+                                                        onMouseDown={() => setConfirmVisiblePassword(!confirmVisiblePassword)}
+                                                        edge="end"
+                                                    >
+                                                        {confirmVisiblePassword ? <VisibilityOff/> : <Visibility/>}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                    </FormControl>
                                 </Stack>
 
                                 <Button
@@ -92,7 +148,7 @@ const ChangePasswordPage = () => {
                             </CardContent>
                         </Card>
                     </Grid>
-                </Grid>}
+                </Grid>
             </Container>
         </Box>
     )

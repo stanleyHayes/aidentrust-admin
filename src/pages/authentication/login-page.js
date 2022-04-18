@@ -1,9 +1,8 @@
 import {
     Box,
     Button,
-    Checkbox,
     Container, FormControl,
-    FormControlLabel, IconButton, InputAdornment, InputLabel,
+    IconButton, InputAdornment, InputLabel, LinearProgress,
     OutlinedInput,
     Stack,
     TextField,
@@ -13,10 +12,13 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import {makeStyles} from "@mui/styles";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {useSelector} from "react-redux";
+import {selectAuth} from "../../redux/authentication/authentication-reducer";
+import {Alert, AlertTitle} from "@mui/lab";
+import {grey} from "@mui/material/colors";
 
 const LoginPage = () => {
     const [user, setUser] = useState({});
-    const [rememberPassword, setRememberPassword] = useState(false);
     const [visiblePassword, setVisiblePassword] = useState(false);
     const [error, setError] = useState({});
     const {email, password} = user;
@@ -38,21 +40,22 @@ const LoginPage = () => {
             }
         }
     });
+    const {authLoading, authError} = useSelector(selectAuth);
 
     const classes = useStyles();
 
     const handleSubmit = () => {
-        if(!email){
+        if (!email) {
             setError({error, email: 'Field required'});
             return;
-        }else{
+        } else {
             setError({error, email: null});
         }
 
-        if(!password){
+        if (!password) {
             setError({error, password: 'Field required'});
             return;
-        }else{
+        } else {
             setError({error, password: null});
         }
 
@@ -84,6 +87,14 @@ const LoginPage = () => {
                     justifyContent: 'center'
                 }}>
                 <Container maxWidth="sm" sx={{my: 3}}>
+                    {authLoading && <LinearProgress variant="query" color="primary"/>}
+                    {
+                        authError && (
+                            <Alert sx={{my: 3}} severity="error" color="error" variant="standard">
+                                <AlertTitle> {authError}</AlertTitle>
+                            </Alert>
+                        )
+                    }
                     <Typography
                         sx={{color: 'primary.main', fontWeight: 'bold', textTransform: 'uppercase'}}
                         gutterBottom={true}
@@ -109,30 +120,20 @@ const LoginPage = () => {
                             size="medium"
                             onChange={handleChange}
                         />
-
-                        <Stack direction="row" justifyContent="space-between" alignItems="center">
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        onChange={event => setRememberPassword(event.target.checked)}
-                                        size="small" value={rememberPassword}/>}
-                                label={
-                                <Typography
-                                    sx={{fontSize: 11}}
-                                    variant="body2">
-                                    Remember Password
-                                </Typography>}
-                            />
-
+                        <Box my={2}>
                             <Link className={classes.link} to="/auth/forgot-password">
                                 <Button
-                                    sx={{fontSize: 11, textTransform: 'capitalize'}}
-                                    variant="text" size="small">
+                                    sx={{
+                                        fontSize: 14,
+                                        textTransform: 'capitalize',
+                                        color: grey[600]
+                                    }}
+                                    variant="text" size="large">
                                     Forgot Password
                                 </Button>
                             </Link>
-                        </Stack>
 
+                        </Box>
 
                         <FormControl variant="outlined">
                             <InputLabel htmlFor="password">Password</InputLabel>
@@ -157,7 +158,7 @@ const LoginPage = () => {
                                             onMouseDown={() => setVisiblePassword(!visiblePassword)}
                                             edge="end"
                                         >
-                                            {visiblePassword ? <VisibilityOff /> : <Visibility />}
+                                            {visiblePassword ? <VisibilityOff/> : <Visibility/>}
                                         </IconButton>
                                     </InputAdornment>
                                 }
@@ -180,8 +181,10 @@ const LoginPage = () => {
                             '&:active': {
                                 color: 'primary.main'
                             }
-                    }}
+                        }}
+                        onClick={handleSubmit}
                         size="large"
+                        disabled={authLoading}
                         fullWidth={true}
                         variant="outlined">
                         Login
@@ -199,7 +202,7 @@ const LoginPage = () => {
                         md: 1
                     }
                 }}>
-                <img className={classes.auth} src="/assets/images/auth.png"  alt=""/>
+                <img className={classes.auth} src="/assets/images/auth.png" alt=""/>
             </Box>
         </Box>
     )
