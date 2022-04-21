@@ -1,6 +1,6 @@
-import {AUTH_ACTION_TYPES} from "./auth-action-types";
+import {AUTH_ACTION_TYPES} from "./authentication-action-types";
 import axios from "axios";
-import {CONSTANTS} from "../../utils/constants/constants";
+import {CONSTANTS} from "../../constants/constants";
 
 const signInRequest = () => {
     return {
@@ -28,14 +28,14 @@ const signIn = (user, navigate) => {
             dispatch(signInRequest());
             const response = await axios({
                 method: 'POST',
-                url: `${CONSTANTS.URL_BASE_SERVER}/auth/login`,
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/login`,
                 data: user
             });
             const {data, token, message} = response.data;
             dispatch(signInSuccess(data, token, message));
             navigate('/');
-            localStorage.setItem(CONSTANTS.WINDY_CRAFT_ADMIN_TOKEN_KEY, token);
-            localStorage.setItem(CONSTANTS.WINDY_CRAFT_ADMIN_AUTH_KEY, JSON.stringify(data));
+            localStorage.setItem(CONSTANTS.AIDEN_TRUST_ADMIN_AUTH_TOKEN_KEY, token);
+            localStorage.setItem(CONSTANTS.AIDEN_TRUST_ADMIN_AUTH_DATA_KEY, JSON.stringify(data));
         } catch (e) {
             const {message} = e.response.data;
             dispatch(signInFail(message));
@@ -70,7 +70,7 @@ const forgotPassword = user => {
             dispatch(forgotPasswordRequest());
             const response = await axios({
                 method: 'POST',
-                url: `${CONSTANTS.URL_BASE_SERVER}/auth/forgot-password`,
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/forgot-password`,
                 data: user
             });
             const {data, message} = response.data;
@@ -109,7 +109,7 @@ const resetPassword = user => {
             dispatch(resetPasswordRequest());
             const response = await axios({
                 method: 'POST',
-                url: `${CONSTANTS.URL_BASE_SERVER}/auth/reset-password`,
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/reset-password`,
                 data: user
             });
             const {data, message} = response.data;
@@ -128,10 +128,10 @@ const changePasswordRequest = () => {
     }
 }
 
-const changePasswordSuccess = (data, token) => {
+const changePasswordSuccess = (data, message) => {
     return {
         type: AUTH_ACTION_TYPES.CHANGE_PASSWORD_SUCCESS,
-        payload: {data, token}
+        payload: {data, message}
     }
 }
 
@@ -142,19 +142,22 @@ const changePasswordFail = message => {
     }
 }
 
-const changePassword = user => {
+const changePassword = (user, token) => {
     return async dispatch => {
         try {
             dispatch(changePasswordRequest());
             const response = await axios({
-                method: 'POST',
-                url: `${CONSTANTS.URL_BASE_SERVER}/auth/change-password`,
-                data: user
+                method: 'PUT',
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/password/change`,
+                data: user,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             const {data, message} = response.data;
             dispatch(changePasswordSuccess(data, message));
         } catch (e) {
-            const {message} = e.response.data.error;
+            const {message} = e.response.data;
             dispatch(changePasswordFail(message));
         }
     }
@@ -167,10 +170,10 @@ const updateProfileRequest = () => {
     }
 }
 
-const updateProfileSuccess = (data, token) => {
+const updateProfileSuccess = (data) => {
     return {
         type: AUTH_ACTION_TYPES.UPDATE_PROFILE_SUCCESS,
-        payload: {data, token}
+        payload: data
     }
 }
 
@@ -181,19 +184,23 @@ const updateProfileFail = message => {
     }
 }
 
-const updateProfile = user => {
+const updateProfile = (user, token, navigate) => {
     return async dispatch => {
         try {
             dispatch(updateProfileRequest());
             const response = await axios({
-                method: 'POST',
-                url: `${CONSTANTS.URL_BASE_SERVER}/auth/update-password`,
-                data: user
+                method: 'PUT',
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/profile`,
+                data: user,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
-            const {data, message} = response.data;
-            dispatch(updateProfileSuccess(data, message));
+            const {data} = response.data;
+            dispatch(updateProfileSuccess(data));
+            navigate('/profile');
         } catch (e) {
-            const {message} = e.response.data.error;
+            const {message} = e.response.data;
             dispatch(updateProfileFail(message));
         }
     }
@@ -226,13 +233,13 @@ const logout = user => {
             dispatch(logoutRequest());
             const response = await axios({
                 method: 'POST',
-                url: `${CONSTANTS.URL_BASE_SERVER}/auth/logout`,
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/logout`,
                 data: user
             });
             const {data, message} = response.data;
             dispatch(logoutSuccess(data, message));
         } catch (e) {
-            const {message} = e.response.data.error;
+            const {message} = e.response.data;
             dispatch(logoutFail(message));
         }
     }
@@ -265,15 +272,15 @@ const getProfile = (token) => {
             dispatch(getProfileRequest());
             const response = await axios({
                 method: 'GET',
-                url: `${CONSTANTS.URL_BASE_SERVER}/auth/profile`,
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/profile`,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            const {data, message} = response.data;
-            dispatch(getProfileSuccess(data, message));
+            const {data} = response.data;
+            dispatch(getProfileSuccess(data, token));
         } catch (e) {
-            const {message} = e.response.data.error;
+            const {message} = e.response.data;
             dispatch(getProfileFail(message));
         }
     }
@@ -300,20 +307,60 @@ const verifyAccountFail = message => {
     }
 }
 
-const verifyAccount = user => {
+const verifyAccount = (user, token, navigate) => {
     return async dispatch => {
         try {
             dispatch(verifyAccountRequest());
             const response = await axios({
-                method: 'POST',
-                url: `${CONSTANTS.URL_BASE_SERVER}/auth/login`,
+                method: 'PUT',
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/profile/verify/${token}`,
                 data: user
             });
             const {data, message} = response.data;
             dispatch(verifyAccountSuccess(data, message));
+            navigate('/auth/verify/acknowledgment/success');
         } catch (e) {
-            const {message} = e.response.data.error;
+            const {message} = e.response.data;
             dispatch(verifyAccountFail(message));
+        }
+    }
+}
+
+
+const logoutAllRequest = () => {
+    return {
+        type: AUTH_ACTION_TYPES.LOGOUT_ALL_REQUEST
+    }
+}
+
+const logoutAllSuccess = message => {
+    return {
+        type: AUTH_ACTION_TYPES.LOGOUT_ALL_SUCCESS,
+        payload: message
+    }
+}
+
+const logoutAllFail = message => {
+    return {
+        type: AUTH_ACTION_TYPES.LOGOUT_ALL_FAIL,
+        payload: message
+    }
+}
+
+const logoutAll = navigate => {
+    return async dispatch => {
+        try {
+            dispatch(logoutAllRequest());
+            const response = await axios({
+                method: 'POST',
+                url: `${CONSTANTS.SERVER_BASE_URL}/auth/logoutAll`
+            });
+            const {message} = response.data;
+            dispatch(logoutAllSuccess(message));
+            navigate('/auth/login');
+        } catch (e) {
+            const {message} = e.response.data;
+            dispatch(logoutAllFail(message));
         }
     }
 }
@@ -327,5 +374,6 @@ export const AUTH_ACTION_CREATORS = {
     changePassword,
     updateProfile,
     resetPassword,
-    forgotPassword
+    forgotPassword,
+    logoutAll
 };

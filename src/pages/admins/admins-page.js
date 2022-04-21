@@ -14,12 +14,12 @@ import {
     TableHead,
     TableRow,
     TextField,
-    Typography
+    Typography,
+    Alert,
+    AlertTitle, Tooltip
 } from "@mui/material";
-import {makeStyles} from "@mui/styles";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
 import {Edit, Visibility} from "@mui/icons-material";
 import {green, grey, purple, red} from "@mui/material/colors";
@@ -34,18 +34,8 @@ import {
 
 const AdminsPage = () => {
 
-    const useStyles = makeStyles(theme => {
-        return {
-            container: {
-                marginTop: 16,
-                marginBottom: 16
-            }
-        }
-    });
-
     const {admins, adminError, adminLoading} = useSelector(selectAdmin);
     const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
-    const classes = useStyles();
     const navigate = useNavigate();
     const [query, setQuery] = useState("");
 
@@ -95,21 +85,19 @@ const AdminsPage = () => {
 
     return (
         <Layout>
-            {adminLoading && <LinearProgress color="secondary" variant="query"/>}
-            <Container className={classes.container}>
+            {adminLoading && <LinearProgress color="primary" variant="query"/>}
+
+            <Container sx={{my: 8}}>
                 {
                     adminError &&
                     (
                         <Alert severity="error" variant="standard">
-                            <AlertTitle>Error</AlertTitle>
-                            <Typography variant="h6" align="center">
-                                {adminError}
-                            </Typography>
+                            <AlertTitle>{adminError}</AlertTitle>
                         </Alert>
                     )
                 }
 
-                <Grid sx={{my: 4, mt: {xs: 8, md: 4}}} container={true} justifyContent="space-between" spacing={2}
+                <Grid sx={{my: 2}} container={true} justifyContent="space-between" spacing={2}
                       alignItems="center">
                     <Grid item={true} xs={12} md={3}>
                         <Typography variant="h4">
@@ -222,9 +210,9 @@ const AdminsPage = () => {
                                                 <TableCell align="center">{admin.username}</TableCell>
                                                 <TableCell align="center">{admin.phoneNumber}</TableCell>
                                                 <TableCell
-                                                    align="center">{renderStatus(admin.accountStatus.status)}</TableCell>
+                                                    align="center">{renderStatus(admin.status)}</TableCell>
                                                 <TableCell align="center">
-                                                    {moment(admin.updatedAt).fromNow()}
+                                                    {moment(admin.createdAt).fromNow()}
                                                 </TableCell>
                                                 <TableCell>
                                                     <Grid
@@ -233,20 +221,37 @@ const AdminsPage = () => {
                                                         alignItems="center"
                                                         spacing={1}>
                                                         <Grid item={true}>
-                                                            <Visibility
-                                                                onClick={() => navigate(`/admins/${admin._id}/detail`)}
-                                                                sx={{pointer: 'cursor'}}
-                                                                fontSize="small"
-                                                                color="primary"
-                                                            />
+                                                            <Tooltip title={`View details of ${admin.firstName}`}>
+                                                                <Visibility
+                                                                    onClick={() => navigate(`/admins/${admin._id}/detail`)}
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
+                                                                    fontSize="small"
+                                                                    color="primary"
+                                                                />
+                                                            </Tooltip>
+
                                                         </Grid>
                                                         <Grid item={true}>
-                                                            <Edit
-                                                                onClick={() => navigate(`/admins/${admin._id}/update`)}
-                                                                sx={{pointer: 'cursor'}}
-                                                                fontSize="small"
-                                                                color="primary"
-                                                            />
+                                                            <Tooltip title={`Update details of ${admin.firstName}`}>
+                                                                <Edit
+                                                                    onClick={() => navigate(`/admins/${admin._id}/update`)}
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
+                                                                    fontSize="small"
+                                                                    color="primary"
+                                                                />
+                                                            </Tooltip>
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>
@@ -280,7 +285,7 @@ const AdminsPage = () => {
                                 </Table>
                             </TableContainer>
                             <Box sx={{backgroundColor: purple[50]}} py={5}>
-                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                <Typography sx={{color: purple[500]}} variant="body1" align="center">
                                     No admins available
                                 </Typography>
                             </Box>

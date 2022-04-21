@@ -74,7 +74,7 @@ const ProfilePage = () => {
                                             sx={{color: purple[600]}}
                                             variant="h4"
                                             align="center">
-                                            {UTILS.getInitials(`${authData.firstName} ${authData.lastName}`)}
+                                            {authData && UTILS.getInitials(`${authData.firstName} ${authData.lastName}`)}
                                         </Typography>
                                     </Avatar>
                                 </Stack>
@@ -118,7 +118,7 @@ const ProfilePage = () => {
                                         </Button>
                                     </Stack>
 
-                                    <Divider light={true} sx={{my: 1}} variant="middle"/>
+                                    <Divider light={true} sx={{my: 1.5}} variant="middle"/>
 
                                     <Grid spacing={2} container={true}>
                                         <Grid item={true} xs={12} md={6}>
@@ -126,7 +126,7 @@ const ProfilePage = () => {
                                                 sx={{color: purple[50]}}
                                                 icon={<Call sx={{color: "primary.main"}}/>}
                                                 title="Emergency Phone"
-                                                value={authData.emergencyPhoneNumber}
+                                                value={authData && authData.emergencyPhoneNumber}
 
                                             />
                                         </Grid>
@@ -135,7 +135,7 @@ const ProfilePage = () => {
                                                 sx={{color: purple[50]}}
                                                 icon={<Call sx={{color: "primary.main"}}/>}
                                                 title="Phone"
-                                                value={authData.phoneNumber}
+                                                value={authData && authData.phoneNumber}
 
                                             />
                                         </Grid>
@@ -144,7 +144,7 @@ const ProfilePage = () => {
                                                 sx={{color: purple[50]}}
                                                 icon={<CalendarToday sx={{color: "primary.main"}}/>}
                                                 title="Joined"
-                                                value={moment(authData.createdAt).fromNow()}
+                                                value={authData && moment(authData.createdAt).fromNow()}
                                             />
                                         </Grid>
                                         <Grid item={true} xs={12} md={6}>
@@ -152,7 +152,7 @@ const ProfilePage = () => {
                                                 sx={{color: purple[50]}}
                                                 icon={<Person sx={{color: "primary.main"}}/>}
                                                 title="Username"
-                                                value={authData.username}
+                                                value={authData && authData.username}
                                             />
                                         </Grid>
                                     </Grid>

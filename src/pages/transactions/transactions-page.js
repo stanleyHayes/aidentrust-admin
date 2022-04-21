@@ -188,7 +188,7 @@ const TransactionsPage = () => {
                 {
                     transactions && transactions.length === 0 &&
                     (
-                        <Box my={4}>
+                        <Box>
                             <TableContainer component={Paper} elevation={0}>
                                 <Table size="medium" sx={{minWidth: 650}} aria-label="transactions table">
                                     <TableHead>
@@ -206,7 +206,7 @@ const TransactionsPage = () => {
                                 </Table>
                             </TableContainer>
                             <Box sx={{backgroundColor: purple[50]}} py={5}>
-                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                <Typography sx={{color: purple[500]}} variant="body1" align="center">
                                     No transactions available
                                 </Typography>
                             </Box>

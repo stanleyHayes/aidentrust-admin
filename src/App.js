@@ -27,6 +27,10 @@ import UpdateUserPage from "./pages/users/update-user-page";
 import UserDetailPage from "./pages/users/user-detail-page";
 import AdminDetailPage from "./pages/admins/admin-detail-page";
 import {CssBaseline} from "@mui/material";
+import ResetSuccessAcknowledgmentPage from "./components/shared/acknowledgment";
+import RegistrationAcknowledgmentPage from "./pages/authentication/registration-acknowledgment-page";
+import VerifyAccountPage from "./pages/authentication/verify-account-page";
+import RequireAuth from "./components/shared/require-auth";
 
 function App() {
 
@@ -42,45 +46,51 @@ function App() {
         <ThemeProvider theme={THEMES.lightTheme}>
             <CssBaseline/>
             <Routes>
-                <Route element={<DashboardPage/>} path="/"/>
+                <Route element={<RequireAuth><DashboardPage/></RequireAuth>} path="/"/>
 
-                <Route element={<TransactionsPage/>} path="/transactions"/>
+                <Route element={<RequireAuth><TransactionsPage/></RequireAuth>} path="/transactions"/>
 
-                <Route element={<InvitationsPage/>} path="/invitations"/>
+                <Route element={<RequireAuth><InvitationsPage/></RequireAuth>} path="/invitations"/>
 
-                <Route element={<BankAccountsPage/>} path="/bank-accounts"/>
+                <Route element={<RequireAuth><BankAccountsPage/></RequireAuth>} path="/bank-accounts"/>
 
-                <Route element={<UsersPage/>} path="/users"/>
+                <Route element={<ResetSuccessAcknowledgmentPage/>} path="/reset-password/acknowledgment/success"/>
 
-                <Route element={<AdminsPage/>} path="/admins"/>
+                <Route element={<RegistrationAcknowledgmentPage/>} path="/auth/verify/acknowledgment/success"/>
 
-                <Route element={<FundsPage/>} path="/funds"/>
+                <Route element={<RequireAuth><UsersPage/></RequireAuth>} path="/users"/>
 
-                <Route element={<SettingsPage/>} path="/settings"/>
+                <Route element={<VerifyAccountPage/>} path="/auth/verify/:token/:code"/>
 
-                <Route element={<ProfilePage/>} path="/profile"/>
+                <Route element={<RequireAuth><AdminsPage/></RequireAuth>} path="/admins"/>
 
-                <Route element={<RequestPage/>} path="/requests"/>
+                <Route element={<RequireAuth><FundsPage/></RequireAuth>} path="/funds"/>
+
+                <Route element={<RequireAuth><SettingsPage/></RequireAuth>} path="/update-profile"/>
+
+                <Route element={<RequireAuth><ProfilePage/></RequireAuth>} path="/profile"/>
+
+                <Route element={<RequireAuth><RequestPage/></RequireAuth>} path="/requests"/>
 
                 <Route element={<LoginPage/>} path="/auth/login"/>
 
-                <Route element={<CreateUserPage/>} path="/new/user"/>
+                <Route element={<RequireAuth><CreateUserPage/></RequireAuth>} path="/new/user"/>
 
-                <Route element={<UpdateUserPage/>} path="/users/:userID/update"/>
+                <Route element={<RequireAuth><UpdateUserPage/></RequireAuth>} path="/users/:userID/update"/>
 
-                <Route element={<UserDetailPage/>} path="/users/:userID/detail"/>
+                <Route element={<RequireAuth><UserDetailPage/></RequireAuth>} path="/users/:userID/detail"/>
 
-                <Route element={<CreateAdminPage/>} path="/new/admin"/>
+                <Route element={<RequireAuth><CreateAdminPage/></RequireAuth>} path="/new/admin"/>
 
-                <Route element={<UpdateAdminPage/>} path="/admins/:adminID/update"/>
+                <Route element={<RequireAuth><UpdateAdminPage/></RequireAuth>} path="/admins/:adminID/update"/>
 
-                <Route element={<AdminDetailPage/>} path="/admins/:adminID/detail"/>
+                <Route element={<RequireAuth><AdminDetailPage/></RequireAuth>} path="/admins/:adminID/detail"/>
 
-                <Route element={<ForgotPasswordPage/>} path="/auth/forgot-password"/>
+                <Route element={<RequireAuth><ForgotPasswordPage/></RequireAuth>} path="/auth/forgot-password"/>
 
                 <Route element={<ResetPasswordPage/>} path="/auth/reset-password"/>
 
-                <Route element={<ChangePasswordPage/>} path="/change-password"/>
+                <Route element={<RequireAuth><ChangePasswordPage/></RequireAuth>} path="/change-password"/>
 
                 <Route element={<ChangePasswordPage/>} path="/auth/invitation"/>
             </Routes>

@@ -7,7 +7,7 @@ import {
     CompareArrows,
     CompareArrowsOutlined,
     Dashboard,
-    DashboardOutlined,
+    DashboardOutlined, Edit, EditOutlined,
     Face,
     FaceOutlined,
     InsertInvitation,
@@ -17,8 +17,6 @@ import {
     MonetizationOnOutlined,
     Send,
     SendOutlined,
-    Settings,
-    SettingsOutlined,
     VerifiedUser,
     VerifiedUserOutlined
 } from "@mui/icons-material";
@@ -35,13 +33,15 @@ const DesktopDrawer = () => {
                 color: 'text.secondary',
                 backgroundColor: grey[200],
                 padding: 0.5,
-                borderRadius: 4
+                borderRadius: 4,
+                fontSize: 48
             },
             active: {
                 color: 'text.link',
                 backgroundColor: purple[100],
                 padding: 0.5,
-                borderRadius: 4
+                borderRadius: 4,
+                fontSize: 48
             }
         }
     });
@@ -68,7 +68,6 @@ const DesktopDrawer = () => {
                         Aiden Trust
                     </Typography>
                 </Stack>
-                <Divider orientation="horizontal" light={true} variant="middle"/>
                 <Stack
                     divider={<Divider orientation="horizontal" light={true} variant="fullWidth"/>}
                     mt={2} direction="column">
@@ -162,19 +161,11 @@ const DesktopDrawer = () => {
             </Box>
 
             <Box sx={{pb: 4}}>
+
                 <Stack
                     divider={<Divider orientation="horizontal" light={true} variant="middle"/>}
-                    mt={2} direction="column">
-                    <SidebarLink
-                        icon={
-                            pathname === '/settings' ?
-                                <Settings className={classes.active}/> :
-                                <SettingsOutlined className={classes.inactive}/>
-                        }
-                        path="/settings"
-                        label="Settings"
-                        active={pathname === '/settings'}
-                    />
+                    mt={2}
+                    direction="column">
 
                     <SidebarLink
                         icon={
@@ -185,6 +176,28 @@ const DesktopDrawer = () => {
                         path="/profile"
                         label="Profile"
                         active={pathname === '/profile'}
+                    />
+
+                    <SidebarLink
+                        icon={
+                            pathname === '/update-profile' ?
+                                <Edit className={classes.active}/> :
+                                <EditOutlined className={classes.inactive}/>
+                        }
+                        path="/update-profile"
+                        label="Update Profile"
+                        active={pathname === '/update-profile'}
+                    />
+
+                    <SidebarLink
+                        icon={
+                            pathname === '/change-password' ?
+                                <VerifiedUser className={classes.active}/> :
+                                <VerifiedUserOutlined className={classes.inactive}/>
+                        }
+                        path="/change-password"
+                        label="Change Password"
+                        active={pathname === '/change-password'}
                     />
 
                     <Button

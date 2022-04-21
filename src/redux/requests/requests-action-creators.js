@@ -22,7 +22,7 @@ const createRequestFailure = message => {
     }
 }
 
-const createRequest = (request, token) => {
+const createRequest = (request, token, handleClose) => {
     return async dispatch => {
         try {
             dispatch(createRequestRequest());
@@ -36,6 +36,7 @@ const createRequest = (request, token) => {
             });
             const {data} = response.data;
             dispatch(createRequestSuccess(data));
+            handleClose();
         } catch (e) {
             const {message} = e.response.data;
             dispatch(createRequestFailure(message));
@@ -116,6 +117,7 @@ const getRequests = token => {
                     Authorization: `Bearer ${token}`
                 }
             });
+            console.log('get requests', token)
             const {data, count} = response.data;
             dispatch(getRequestsSuccess(data, count));
         } catch (e) {

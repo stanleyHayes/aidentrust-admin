@@ -27,14 +27,14 @@ const MobileHeader = () => {
                             color: 'secondary.main',
                             borderWidth: 1.6,
                             borderStyle: 'solid',
-                            borderRadius: .2,
+                            borderRadius: 1,
                             p: 0.2
                         }}
                         onClick={() => dispatch(UI_ACTION_CREATORS.openDrawer())}/>
                 </Grid>
                 <Grid item={true}>
                     <Link to="/" className={classes.link}>
-                        <Typography sx={{color: 'secondary.main'}} variant="h6">
+                        <Typography sx={{color: 'secondary.main'}} variant="h5">
                             Aiden Trust
                         </Typography>
                     </Link>

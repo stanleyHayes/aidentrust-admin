@@ -1,61 +1,48 @@
 import Layout from "../../components/layout/layout";
 import {
-    Box,
-    Button,
+    Alert, AlertTitle,
     Card,
     CardContent,
+    CircularProgress,
     Container,
     Divider,
-    FormControl,
-    Grid,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    MenuItem,
-    OutlinedInput,
-    Select,
+    Grid, LinearProgress,
     Stack,
     TextField,
     Typography
 } from "@mui/material";
 import {makeStyles} from "@mui/styles";
 import {useEffect, useState} from "react";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {DatePicker} from "@mui/lab";
-import {useSelector} from "react-redux";
-import {selectUser} from "../../redux/users/users-reducer";
+import {LoadingButton} from "@mui/lab";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAuth} from "../../redux/authentication/authentication-reducer";
+import validator from "validator";
+import {AUTH_ACTION_CREATORS} from "../../redux/authentication/authentication-action-creators";
+import {useNavigate} from "react-router";
 
 const SettingsPage = () => {
 
     const useStyles = makeStyles(theme => {
         return {
             container: {
-                paddingTop: 16,
-                paddingBottom: 16
+                paddingTop: 16, paddingBottom: 16
             }
         }
     });
 
     const classes = useStyles();
 
-    const {userDetail, userLoading, userError} = useSelector(selectUser);
+    const {authLoading, token, authData, authError} = useSelector(selectAuth);
 
     useEffect(() => {
-        if (userDetail) setUser(userDetail);
-    }, [userDetail]);
+        if (authData) setUser(authData);
+    }, [authData]);
 
 
     const [user, setUser] = useState({});
     const [error, setError] = useState({});
     const {
-        firstName,
-        lastName,
-        email,
-        username,
-        phoneNumber,
-        emergencyPhoneNumber,
-        gender,
-        dateOfBirth
+        firstName, lastName, email, username, phoneNumber, emergencyPhoneNumber
     } = user;
 
 
@@ -63,18 +50,83 @@ const SettingsPage = () => {
         setUser({...user, [event.target.name]: event.target.value});
     }
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        if (!firstName) {
+            setError({error, firstName: 'Field required'});
+            return;
+        } else {
+            setError({error, firstName: null});
+        }
+
+        if (!lastName) {
+            setError({error, lastName: 'Field required'});
+            return;
+        } else {
+            setError({error, lastName: null});
+        }
+
+        if (!email) {
+            setError({error, email: 'Field required'});
+            return;
+        } else {
+            setError({error, email: null});
+        }
+        if (!validator.isEmail(email)) {
+            setError({error, email: 'Invalid email'});
+            return;
+        } else {
+            setError({error, email: null});
+        }
+
+        if (!phoneNumber) {
+            setError({error, phoneNumber: 'Field required'});
+            return;
+        } else {
+            setError({error, phoneNumber: null});
+        }
+
+        if (!validator.isMobilePhone(phoneNumber)) {
+            setError({error, phoneNumber: 'Invalid phone'});
+            return;
+        } else {
+            setError({error, phoneNumber: null});
+        }
+
+
+        if (!emergencyPhoneNumber) {
+            setError({error, emergencyPhoneNumber: 'Field required'});
+            return;
+        } else {
+            setError({error, emergencyPhoneNumber: null});
+        }
+        if (!validator.isMobilePhone(emergencyPhoneNumber)) {
+            setError({error, emergencyPhoneNumber: 'Invalid phone'});
+            return;
+        } else {
+            setError({error, emergencyPhoneNumber: null});
+        }
+        dispatch(AUTH_ACTION_CREATORS.updateProfile(
+            { firstName, lastName, email, username, phoneNumber, emergencyPhoneNumber},
+            token, navigate));
+    }
+
+
     return (
         <Layout>
+            {authLoading && <LinearProgress variant="query" color="primary"/>}
             <Container className={classes.container}>
-
                 <Grid
-                    sx={{my: 4, mt: {xs: 8, md: 4}}}
+                    sx={{my: 4}}
                     container={true}
                     justifyContent="space-between"
                     spacing={2}>
                     <Grid item={true} xs={12} md="auto">
                         <Typography variant="h4">
-                            Settings
+                            Update Profile
                         </Typography>
                     </Grid>
                 </Grid>
@@ -86,22 +138,24 @@ const SettingsPage = () => {
                     container={true}
                     justifyContent="space-between">
                     <Grid item={true} xs={12} md={6}>
-                        <Card elevation={1}>
+                        <Card elevation={0}>
+                            {authLoading && <LinearProgress variant="query" color="primary"/>}
                             <CardContent>
-                                <Typography
-                                    mb={4}
-                                    variant="h5"
-                                    align="center">
-                                    Update Profile
-                                </Typography>
-                                <Stack my={3} spacing={2} direction="column">
+                                {
+                                    authError && (
+                                        <Alert sx={{mb: 2}} severity="error">
+                                            <AlertTitle>{authError}</AlertTitle>
+                                        </Alert>
+                                    )
+                                }
+                                <Stack spacing={2} direction="column">
                                     <TextField
                                         label="First Name"
                                         fullWidth={true}
                                         name="firstName"
                                         required={true}
                                         variant="outlined"
-                                        value={userDetail && firstName}
+                                        value={authData && firstName}
                                         error={Boolean(error.firstName)}
                                         helperText={error.firstName}
                                         type="text"
@@ -155,22 +209,6 @@ const SettingsPage = () => {
                                         onChange={handleUserChange}
                                     />
 
-                                    <FormControl fullWidth>
-                                        <InputLabel htmlFor="gender-label">Gender</InputLabel>
-                                        <Select
-                                            labelId="gender-label"
-                                            label="Gender"
-                                            name="gender"
-                                            id="gender"
-                                            onChange={handleUserChange}
-                                            fullWidth={true}
-                                            value={gender}>
-                                            <MenuItem value="">Select Gender</MenuItem>
-                                            <MenuItem value="Male">Male</MenuItem>
-                                            <MenuItem value="Female">Female</MenuItem>
-                                        </Select>
-                                    </FormControl>
-
 
                                     <TextField
                                         label="Phone"
@@ -201,41 +239,29 @@ const SettingsPage = () => {
                                         onChange={handleUserChange}
                                     />
 
-                                    <Box>
-                                        <DatePicker
-                                            rawValue={dateOfBirth}
-                                            label="Date of birth"
-                                            value={dateOfBirth}
-                                            onChange={(date) => {
-                                                setUser({...user, 'dateOfBirth': date})
-                                            }}
-                                            renderInput={
-                                                (params) =>
-                                                    <TextField
-                                                        variant="outlined"
-                                                        fullWidth={true}
-                                                        placeholder="Date of birth"
-                                                        margin="normal"
-                                                        label="Start Date" {...params} />}
-                                            date={dateOfBirth}
-                                        />
-                                    </Box>
+                                    <LoadingButton
+                                        loading={authLoading}
+                                        loadingIndicator={<CircularProgress size="small" color="secondary"/>}
+                                        onClick={handleSubmit}
+                                        sx={{
+                                            backgroundColor: 'primary.main',
+                                            color: 'white',
+                                            textTransform: 'capitalize',
+                                            py: 1.5,
+                                        }}
+                                        size="large"
+                                        fullWidth={true}
+                                        disableElevation={true}
+                                        variant="contained">
+                                        Update Profile
+                                    </LoadingButton>
                                 </Stack>
-
-                                <Button
-                                    sx={{backgroundColor: 'primary.main', color: 'white'}}
-                                    size="large"
-                                    fullWidth={true}
-                                    variant="outlined">
-                                    Update Profile
-                                </Button>
                             </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
             </Container>
-        </Layout>
-    )
+        </Layout>)
 }
 
 export default SettingsPage;

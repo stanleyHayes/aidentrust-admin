@@ -1,6 +1,9 @@
 import {Button, Dialog, DialogContent, Stack, TextField, Typography} from "@mui/material";
 import {useState} from "react";
 import validator from "validator/es";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAuth} from "../../../redux/authentication/authentication-reducer";
+import {REQUEST_ACTION_CREATORS} from "../../../redux/requests/requests-action-creators";
 
 const UserInvitationDialog = ({open, handleClose}) => {
 
@@ -10,6 +13,9 @@ const UserInvitationDialog = ({open, handleClose}) => {
     const handleChange = event => {
         setEmail(event.target.value);
     }
+
+    const dispatch = useDispatch();
+    const {token} = useSelector(selectAuth);
 
     const handleSubmit = () => {
         if(!email){
@@ -25,17 +31,17 @@ const UserInvitationDialog = ({open, handleClose}) => {
         }else{
             setError("");
         }
-        console.log(email);
+        dispatch(REQUEST_ACTION_CREATORS.createRequest({email}, token, handleClose));
     }
 
     return (
         <Dialog open={open} onClose={handleClose}>
             <DialogContent>
-                <Typography mb={4} variant="h6" align="center">
+                <Typography mb={2} variant="h4" align="center">
                     Invite User
                 </Typography>
 
-                <Stack direction="column" spacing={1}>
+                <Stack direction="column" spacing={2}>
                     <TextField
                         label="Email"
                         fullWidth={true}
@@ -46,17 +52,17 @@ const UserInvitationDialog = ({open, handleClose}) => {
                         error={Boolean(error)}
                         helperText={error}
                         type="email"
-                        size="small"
+                        size="medium"
                         onChange={handleChange}
                     />
                     <Button
                         onClick={handleSubmit}
-                        sx={{fontWeight: 'bold', color: 'white'}}
+                        sx={{color: 'white', my: 2, textTransform: 'capitalize'}}
                         color="primary"
                         disableElevation={true}
                         variant="contained"
                         fullWidth={true}
-                        size="medium">
+                        size="large">
                         Invite
                     </Button>
                 </Stack>

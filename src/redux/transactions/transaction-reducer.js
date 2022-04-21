@@ -33,6 +33,54 @@ const transactionReducer = (state = INITIAL_STATE, action) => {
                 transactionLoading: false
             }
 
+
+        case TRANSACTIONS_ACTION_TYPES.GET_TRANSACTION_REQUEST:
+            return {
+                ...state,
+                transactionError: null,
+                transactionLoading: true
+            }
+
+        case TRANSACTIONS_ACTION_TYPES.GET_TRANSACTION_SUCCESS:
+            return {
+                ...state,
+                transactionError: null,
+                transactionLoading: false,
+                transactionDetail: action.payload
+            }
+
+        case TRANSACTIONS_ACTION_TYPES.GET_TRANSACTION_FAIL:
+            return {
+                ...state,
+                transactionError: action.payload,
+                transactionLoading: false
+            }
+
+
+        case TRANSACTIONS_ACTION_TYPES.UPDATE_TRANSACTION_REQUEST:
+            return {
+                ...state,
+                transactionError: null,
+                transactionLoading: true
+            }
+
+        case TRANSACTIONS_ACTION_TYPES.UPDATE_TRANSACTION_SUCCESS:
+            return {
+                ...state,
+                transactionError: null,
+                transactionLoading: false,
+                transactions: [...state.transactions.map(transaction => {
+                    if(transaction._id === action.payload) return action.payload;
+                    return transaction;
+                })]
+            }
+
+        case TRANSACTIONS_ACTION_TYPES.UPDATE_TRANSACTION_FAIL:
+            return {
+                ...state,
+                transactionError: action.payload,
+                transactionLoading: false
+            }
         default:
             return state;
     }
