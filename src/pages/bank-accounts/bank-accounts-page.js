@@ -13,12 +13,11 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    TextField,
+    TextField, Tooltip,
     Typography
 } from "@mui/material";
-import {makeStyles} from "@mui/styles";
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
 import {Edit, Visibility} from "@mui/icons-material";
@@ -27,20 +26,12 @@ import User from "../../components/shared/user";
 import {selectBankAccount} from "../../redux/bank-accounts/bank-account-reducer";
 import AddBankDialog from "../../components/dialogs/new/add-bank-dialog";
 import ViewBankAccountDetailDialog from "../../components/dialogs/view/view-bank-account-detail-dialog";
+import {selectAuth} from "../../redux/authentication/authentication-reducer";
+import {BANK_ACCOUNT_ACTION_CREATORS} from "../../redux/bank-accounts/bank-account-action-creators";
 
 const BankAccountsPage = () => {
 
-    const useStyles = makeStyles(theme => {
-        return {
-            container: {
-                marginTop: 16,
-                marginBottom: 16
-            }
-        }
-    });
-
     const {bankAccounts, bankAccountError, bankAccountLoading} = useSelector(selectBankAccount);
-    const classes = useStyles();
 
     const [query, setQuery] = useState("");
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -87,10 +78,18 @@ const BankAccountsPage = () => {
                 );
         }
     }
+
+    const dispatch = useDispatch();
+    const {token} = useSelector(selectAuth);
+
+    useEffect(() => {
+        dispatch(BANK_ACCOUNT_ACTION_CREATORS.getBankAccounts(token));
+    }, [dispatch, token]);
+
     return (
         <Layout>
             {bankAccountLoading && <LinearProgress color="secondary" variant="query"/>}
-            <Container className={classes.container}>
+            <Container sx={{my: 4, mt: {xs: 8, mt: 4}}}>
                 {
                     bankAccountError &&
                     (
@@ -103,7 +102,12 @@ const BankAccountsPage = () => {
                     )
                 }
 
-                <Grid sx={{my: 4,  mt: {xs: 8, md: 4}}} container={true} justifyContent="space-between" spacing={2} alignItems="center">
+                <Grid
+                    sx={{my: 4, mt: {xs: 8, md: 4}}}
+                    container={true}
+                    justifyContent="space-between"
+                    spacing={2}
+                    alignItems="center">
                     <Grid item={true} xs={12} md={4}>
                         <Typography variant="h5">
                             Bank Accounts ({bankAccounts && bankAccounts.length})
@@ -205,18 +209,36 @@ const BankAccountsPage = () => {
                                                         alignItems="center"
                                                         spacing={1}>
                                                         <Grid item={true}>
-                                                            <Visibility
-                                                                sx={{cursor: 'pointer'}}
-                                                                onClick={() => handleSelectedBankAccount(bankAccount)}
-                                                                fontSize="small"
-                                                                color="primary"
-                                                            />
+                                                            <Tooltip
+                                                                title={`View details of ${bankAccount.user.firstName}`}>
+                                                                <Visibility
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
+                                                                    onClick={() => handleSelectedBankAccount(bankAccount)}
+                                                                    fontSize="small"
+                                                                    color="primary"
+                                                                />
+                                                            </Tooltip>
                                                         </Grid>
                                                         <Grid item={true}>
-                                                            <Edit
-                                                                fontSize="small"
-                                                                color="primary"
-                                                            />
+                                                            <Tooltip title={`Update details of ${bankAccount.user.firstName}`}>
+                                                                <Edit
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
+                                                                    fontSize="small"
+                                                                    color="primary"
+                                                                />
+                                                            </Tooltip>
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>

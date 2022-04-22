@@ -5,10 +5,14 @@ const INITIAL_STATE = {
     userLoading: false,
     userError: null,
     totalUsers: 0,
+    userDetail: null,
+    bankAccount: null,
+    transactions: [],
+    request: null
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
-    switch (action.type){
+    switch (action.type) {
 
         case USERS_ACTION_TYPES.GET_USERS_REQUEST:
             return {
@@ -27,6 +31,31 @@ const userReducer = (state = INITIAL_STATE, action) => {
             }
 
         case USERS_ACTION_TYPES.GET_USERS_FAIL:
+            return {
+                ...state,
+                userError: action.payload,
+                userLoading: false
+            }
+
+        case USERS_ACTION_TYPES.GET_USER_REQUEST:
+            return {
+                ...state,
+                userError: null,
+                userLoading: true
+            }
+
+        case USERS_ACTION_TYPES.GET_USER_SUCCESS:
+            return {
+                ...state,
+                userError: null,
+                userLoading: false,
+                userDetail: action.payload.data,
+                bankAccount: action.payload.bankAccount,
+                transactions: action.payload.transactions,
+                request: action.payload.request
+            }
+
+        case USERS_ACTION_TYPES.GET_USER_FAIL:
             return {
                 ...state,
                 userError: action.payload,

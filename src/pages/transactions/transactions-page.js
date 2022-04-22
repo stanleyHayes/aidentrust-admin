@@ -14,7 +14,7 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TableRow,
+    TableRow, Tooltip,
     Typography
 } from "@mui/material";
 import {makeStyles} from "@mui/styles";
@@ -23,7 +23,7 @@ import {useSelector} from "react-redux";
 import {selectTransaction} from "../../redux/transactions/transaction-reducer";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
-import {Edit, Visibility} from "@mui/icons-material";
+import { Visibility} from "@mui/icons-material";
 import {green, grey, purple, red} from "@mui/material/colors";
 
 const TransactionsPage = () => {
@@ -78,6 +78,7 @@ const TransactionsPage = () => {
                 );
         }
     }
+
     return (
         <Layout>
             {transactionLoading && <LinearProgress color="secondary" variant="query"/>}
@@ -163,16 +164,19 @@ const TransactionsPage = () => {
                                                         alignItems="center"
                                                         spacing={1}>
                                                         <Grid item={true}>
-                                                            <Visibility
-                                                                fontSize="small"
-                                                                color="primary"
-                                                            />
-                                                        </Grid>
-                                                        <Grid item={true}>
-                                                            <Edit
-                                                                fontSize="small"
-                                                                color="primary"
-                                                            />
+                                                            <Tooltip title={`View transaction detail`}>
+                                                                <Visibility
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
+                                                                    fontSize="small"
+                                                                    color="primary"
+                                                                />
+                                                            </Tooltip>
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>

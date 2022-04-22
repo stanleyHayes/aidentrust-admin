@@ -1,212 +1,212 @@
 import axios from "axios";
 import {CONSTANTS} from "../../constants/constants";
-import {ADMINS_ACTION_TYPES} from "./admin-action-types";
+import {BANK_ACCOUNTS_ACTION_TYPES} from "./bank-account-action-types";
 
-const createAdminRequest = () => {
+const createBankAccountRequest = () => {
     return {
-        type: ADMINS_ACTION_TYPES.CREATE_ADMIN_REQUEST
+        type: BANK_ACCOUNTS_ACTION_TYPES.CREATE_BANK_ACCOUNT_REQUEST
     }
 }
 
-const createAdminSuccess = (data) => {
+const createBankAccountSuccess = (data) => {
     return {
-        type: ADMINS_ACTION_TYPES.CREATE_ADMIN_SUCCESS,
+        type: BANK_ACCOUNTS_ACTION_TYPES.CREATE_BANK_ACCOUNT_SUCCESS,
         payload: data
     }
 }
 
-const createAdminFailure = message => {
+const createBankAccountFailure = message => {
     return {
-        type: ADMINS_ACTION_TYPES.CREATE_ADMIN_FAIL,
+        type: BANK_ACCOUNTS_ACTION_TYPES.CREATE_BANK_ACCOUNT_FAIL,
         payload: message
     }
 }
 
-const createAdmin = (admin, token) => {
+const createBankAccount = (bankAccount, token) => {
     return async dispatch => {
         try {
-            dispatch(createAdminRequest());
+            dispatch(createBankAccountRequest());
             const response = await axios({
                 method: 'POST',
-                url: `${CONSTANTS.SERVER_BASE_URL}/admins`,
-                data: admin,
+                url: `${CONSTANTS.SERVER_BASE_URL}/bank-accounts`,
+                data: bankAccount,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             const {data} = response.data;
-            dispatch(createAdminSuccess(data));
+            dispatch(createBankAccountSuccess(data));
         } catch (e) {
             const {message} = e.response.data;
-            dispatch(createAdminFailure(message));
+            dispatch(createBankAccountFailure(message));
         }
     }
 }
 
 
-const getAdminRequest = () => {
+const getBankAccountRequest = () => {
     return {
-        type: ADMINS_ACTION_TYPES.GET_ADMIN_REQUEST
+        type: BANK_ACCOUNTS_ACTION_TYPES.GET_BANK_ACCOUNT_REQUEST
     }
 }
 
-const getAdminSuccess = (data) => {
+const getBankAccountSuccess = (data) => {
     return {
-        type: ADMINS_ACTION_TYPES.GET_ADMIN_SUCCESS,
+        type: BANK_ACCOUNTS_ACTION_TYPES.GET_BANK_ACCOUNT_SUCCESS,
         payload: data
     }
 }
 
-const getAdminFailure = message => {
+const getBankAccountFailure = message => {
     return {
-        type: ADMINS_ACTION_TYPES.GET_ADMIN_FAIL,
+        type: BANK_ACCOUNTS_ACTION_TYPES.GET_BANK_ACCOUNT_FAIL,
         payload: message
     }
 }
 
-const getAdmin = (ID, token) => {
+const getBankAccount = (ID, token) => {
     return async dispatch => {
         try {
-            dispatch(getAdminRequest());
+            dispatch(getBankAccountRequest());
             const response = await axios({
                 method: 'GET',
-                url: `${CONSTANTS.SERVER_BASE_URL}/admins/${ID}`,
+                url: `${CONSTANTS.SERVER_BASE_URL}/bank-accounts/${ID}`,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             const {data} = response.data;
-            dispatch(getAdminSuccess(data));
+            dispatch(getBankAccountSuccess(data));
         } catch (e) {
             const {message} = e.response.data;
-            dispatch(getAdminFailure(message));
+            dispatch(getBankAccountFailure(message));
         }
     }
 }
 
 
-const getAdminsRequest = () => {
+const getBankAccountsRequest = () => {
     return {
-        type: ADMINS_ACTION_TYPES.GET_ADMINS_REQUEST
+        type: BANK_ACCOUNTS_ACTION_TYPES.GET_BANK_ACCOUNTS_REQUEST
     }
 }
 
-const getAdminsSuccess = (data, count) => {
+const getBankAccountsSuccess = (data, count) => {
     return {
-        type: ADMINS_ACTION_TYPES.GET_ADMINS_SUCCESS,
+        type: BANK_ACCOUNTS_ACTION_TYPES.GET_BANK_ACCOUNTS_SUCCESS,
         payload: {data, count}
     }
 }
 
-const getAdminsFailure = admins => {
+const getBankAccountsFailure = message => {
     return {
-        type: ADMINS_ACTION_TYPES.GET_ADMINS_FAIL,
-        payload: admins
+        type: BANK_ACCOUNTS_ACTION_TYPES.GET_BANK_ACCOUNTS_FAIL,
+        payload: message
     }
 }
 
-const getAdmins = token => {
+const getBankAccounts = token => {
     return async dispatch => {
         try {
-            dispatch(getAdminsRequest());
+            dispatch(getBankAccountsRequest());
             const response = await axios({
                 method: 'GET',
-                url: `${CONSTANTS.SERVER_BASE_URL}/admins`,
+                url: `${CONSTANTS.SERVER_BASE_URL}/bank-accounts`,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             const {data, count} = response.data;
-            dispatch(getAdminsSuccess(data, count));
+            dispatch(getBankAccountsSuccess(data, count));
         } catch (e) {
             const {message} = e.response.data;
-            dispatch(getAdminsFailure(message));
+            dispatch(getBankAccountsFailure(message));
         }
     }
 }
 
 
-const updateAdminRequest = () => {
+const updateBankAccountRequest = () => {
     return {
-        type: ADMINS_ACTION_TYPES.UPDATE_ADMIN_REQUEST
+        type: BANK_ACCOUNTS_ACTION_TYPES.UPDATE_BANK_ACCOUNT_REQUEST
     }
 }
 
-const updateAdminSuccess = (data) => {
+const updateBankAccountSuccess = (data) => {
     return {
-        type: ADMINS_ACTION_TYPES.UPDATE_ADMIN_SUCCESS,
+        type: BANK_ACCOUNTS_ACTION_TYPES.UPDATE_BANK_ACCOUNT_SUCCESS,
         payload: data
     }
 }
 
-const updateAdminFailure = message => {
+const updateBankAccountFailure = message => {
     return {
-        type: ADMINS_ACTION_TYPES.UPDATE_ADMIN_FAIL,
+        type: BANK_ACCOUNTS_ACTION_TYPES.UPDATE_BANK_ACCOUNT_FAIL,
         payload: message
     }
 }
 
-const updateAdmin = (admin, ID, token) => {
+const updateBankAccount = (bankAccount, ID, token) => {
     return async dispatch => {
         try {
-            dispatch(updateAdminRequest());
+            dispatch(updateBankAccountRequest());
             const response = await axios({
                 method: 'PUT',
-                url: `${CONSTANTS.SERVER_BASE_URL}/admins/${ID}`,
-                data: admin,
+                url: `${CONSTANTS.SERVER_BASE_URL}/bank-accounts/${ID}`,
+                data: bankAccount,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             const {data} = response.data;
-            dispatch(updateAdminSuccess(data));
+            dispatch(updateBankAccountSuccess(data));
         } catch (e) {
             const {message} = e.response.data;
-            dispatch(updateAdminFailure(message));
+            dispatch(updateBankAccountFailure(message));
         }
     }
 }
 
 
-const deleteAdminRequest = () => {
+const deleteBankAccountRequest = () => {
     return {
-        type: ADMINS_ACTION_TYPES.DELETE_ADMIN_REQUEST
+        type: BANK_ACCOUNTS_ACTION_TYPES.DELETE_BANK_ACCOUNT_REQUEST
     }
 }
 
-const deleteAdminSuccess = (data) => {
+const deleteBankAccountSuccess = (data) => {
     return {
-        type: ADMINS_ACTION_TYPES.DELETE_ADMIN_SUCCESS,
+        type: BANK_ACCOUNTS_ACTION_TYPES.DELETE_BANK_ACCOUNT_SUCCESS,
         payload: data
     }
 }
 
-const deleteAdminFailure = message => {
+const deleteBankAccountFailure = message => {
     return {
-        type: ADMINS_ACTION_TYPES.DELETE_ADMIN_FAIL,
+        type: BANK_ACCOUNTS_ACTION_TYPES.DELETE_BANK_ACCOUNT_FAIL,
         payload: message
     }
 }
 
-const deleteAdmin = (ID, token) => {
+const deleteBankAccount = (ID, token) => {
     return async dispatch => {
         try {
-            dispatch(deleteAdminRequest());
+            dispatch(deleteBankAccountRequest());
             const response = await axios({
                 method: 'DELETE',
-                url: `${CONSTANTS.SERVER_BASE_URL}/admins/${ID}`,
+                url: `${CONSTANTS.SERVER_BASE_URL}/bank-accounts/${ID}`,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             const {data} = response.data;
-            dispatch(deleteAdminSuccess(data));
+            dispatch(deleteBankAccountSuccess(data));
         } catch (e) {
             const {message} = e.response.data;
-            dispatch(deleteAdminFailure(message));
+            dispatch(deleteBankAccountFailure(message));
         }
     }
 }
 
 
-export const ADMIN_ACTION_CREATORS = {createAdmin, deleteAdmin, updateAdmin, getAdmins, getAdmin};
+export const BANK_ACCOUNT_ACTION_CREATORS = {createBankAccount, deleteBankAccount, updateBankAccount, getBankAccounts, getBankAccount};

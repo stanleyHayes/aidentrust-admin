@@ -27,7 +27,7 @@ const Info = ({title, value, icon}) => {
                         </Typography>
 
                         <Typography
-                            sx={{fontSize: 14, color: grey[600]}}
+                            sx={{fontSize: 14, color: grey[700]}}
                             variant="body2">
                             {value}
                         </Typography>

@@ -50,10 +50,10 @@ const getUserRequest = () => {
     }
 }
 
-const getUserSuccess = (data) => {
+const getUserSuccess = (data, bankAccount, transactions, request) => {
     return {
         type: USERS_ACTION_TYPES.GET_USER_SUCCESS,
-        payload: data
+        payload: {data, bankAccount, transactions, request}
     }
 }
 
@@ -75,8 +75,8 @@ const getUser = (ID, token) => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            const {data} = response.data;
-            dispatch(getUserSuccess(data));
+            const {data, bankAccount, transactions, request} = response.data;
+            dispatch(getUserSuccess(data, bankAccount, transactions, request));
         } catch (e) {
             const {message} = e.response.data;
             dispatch(getUserFailure(message));

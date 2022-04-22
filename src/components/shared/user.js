@@ -1,16 +1,17 @@
-import {Avatar, CardHeader, Typography} from "@mui/material";
+import {Avatar, Stack, Typography} from "@mui/material";
 
 const User = ({firstName, lastName, image}) => {
     return (
-        <CardHeader
-            avatar={
+        <Stack direction="row" spacing={2} alignItems="center">
+            {
                 image ?
                     <Avatar src={image}/> :
                     <Avatar>
                         <Typography variant="h6">{`${firstName[0]}${lastName[0]}`}</Typography>
                     </Avatar>
             }
-            title={<Typography variant="body2">{`${firstName} ${lastName}`}</Typography>}/>
+            <Typography variant="body2">{`${firstName} ${lastName}`}</Typography>
+        </Stack>
     )
 }
 
