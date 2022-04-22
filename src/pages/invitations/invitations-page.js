@@ -253,7 +253,7 @@ const InvitationsPage = () => {
                                 </Table>
                             </TableContainer>
                             <Box sx={{backgroundColor: purple[50]}} py={5}>
-                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                <Typography sx={{color: purple[500]}} variant="body1" align="center">
                                     No invitations available
                                 </Typography>
                             </Box>

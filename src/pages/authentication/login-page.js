@@ -92,7 +92,7 @@ const LoginPage = () => {
                         gutterBottom={true}
                         align="center"
                         variant="h3">
-                        Aiden Trust
+                        Aiden Trust Admin
                     </Typography>
                     <Typography gutterBottom={true} align="center" variant="h6">Login</Typography>
                     <Typography gutterBottom={true} align="center" variant="body2">Welcome back</Typography>
@@ -156,11 +156,12 @@ const LoginPage = () => {
 
                     <LoadingButton
                         sx={{
+                            mt: 2,
                             fontWeight: 'bold',
                             textTransform: 'capitalize',
                             backgroundColor: 'primary.main',
                             color: 'secondary.main',
-                            my: 1.5,
+                            py: 1.7,
                             '&:hover': {
                                 color: 'secondary.main'
                             },

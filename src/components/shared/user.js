@@ -5,7 +5,7 @@ const User = ({firstName, lastName, image}) => {
         <CardHeader
             avatar={
                 image ?
-                    <Avatar src="dat"/> :
+                    <Avatar src={image}/> :
                     <Avatar>
                         <Typography variant="h6">{`${firstName[0]}${lastName[0]}`}</Typography>
                     </Avatar>

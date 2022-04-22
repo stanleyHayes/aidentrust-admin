@@ -88,7 +88,6 @@ const RequestsPage = () => {
 
     const dispatch = useDispatch();
 
-    console.log('rending')
     useEffect(() => {
         dispatch(REQUEST_ACTION_CREATORS.getRequests(token));
     }, [dispatch, token]);
@@ -110,6 +109,7 @@ const RequestsPage = () => {
                     sx={{my: 4, mt: {xs: 8, md: 4}}}
                     container={true}
                     justifyContent="space-between"
+                    alignItems="center"
                     spacing={2}>
                     <Grid item={true} xs={12} md="auto">
                         <Typography variant="h4">
@@ -138,12 +138,11 @@ const RequestsPage = () => {
                                 <Button
                                     onClick={() => setInviteDialogOpen(true)}
                                     disableElevation={true}
-                                    size="medium"
+                                    size="large"
                                     fullWidth={true}
                                     sx={{
-                                        color: 'white',
-                                        textTransform: 'capitalize',
-                                        fontWeight: 'bold'
+                                        color: 'secondary.main',
+                                        textTransform: 'capitalize'
                                     }}
                                     variant="contained">
                                     Invite
@@ -160,15 +159,13 @@ const RequestsPage = () => {
                         <Table sx={{minWidth: 650}} size="medium" aria-label="requests table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell align="center">#</TableCell>
-                                    <TableCell align="center">User</TableCell>
-                                    <TableCell align="center">Balance</TableCell>
-                                    <TableCell align="center">Number</TableCell>
-                                    <TableCell align="center">Email</TableCell>
-                                    <TableCell align="center">ID</TableCell>
-                                    <TableCell align="center">Status</TableCell>
-                                    <TableCell align="center">Date</TableCell>
-                                    <TableCell align="center">Actions</TableCell>
+                                    <TableCell>#</TableCell>
+                                    <TableCell>Inviter</TableCell>
+                                    <TableCell>Email</TableCell>
+                                    <TableCell>Code</TableCell>
+                                    <TableCell>Status</TableCell>
+                                    <TableCell>Date</TableCell>
+                                    <TableCell>Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -178,19 +175,17 @@ const RequestsPage = () => {
                                             <TableRow
                                                 hover={true}
                                                 key={index}>
-                                                <TableCell align="center">{index + 1}</TableCell>
-                                                <TableCell align="center">
+                                                <TableCell>{index + 1}</TableCell>
+                                                <TableCell>
                                                     <User
-                                                        lastName={request.lastName}
-                                                        image={request.image}
-                                                        firstName={request.firstName}/>
+                                                        lastName={request.inviter.lastName}
+                                                        image={request.inviter.image}
+                                                        firstName={request.inviter.firstName}/>
                                                 </TableCell>
-                                                <TableCell align="center">${request.balance}</TableCell>
-                                                <TableCell align="center">{request.accountNumber}</TableCell>
-                                                <TableCell align="center">{request.email}</TableCell>
-                                                <TableCell align="center">{request.transactionID}</TableCell>
-                                                <TableCell align="center">{renderStatus(request.status)}</TableCell>
-                                                <TableCell align="center">
+                                                <TableCell>{request.email}</TableCell>
+                                                <TableCell>{request.code}</TableCell>
+                                                <TableCell>{renderStatus(request.status)}</TableCell>
+                                                <TableCell>
                                                     {moment(request.updatedAt).fromNow()}
                                                 </TableCell>
                                                 <TableCell>
@@ -202,7 +197,13 @@ const RequestsPage = () => {
                                                         <Grid item={true}>
                                                             <Tooltip title="View request detail">
                                                                 <Visibility
-                                                                    fontSize="small"
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
                                                                     color="primary"
                                                                 />
                                                             </Tooltip>
@@ -210,7 +211,13 @@ const RequestsPage = () => {
                                                         <Grid item={true}>
                                                             <Tooltip title="View request detail">
                                                                 <Edit
-                                                                    fontSize="small"
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
                                                                     color="primary"
                                                                 />
                                                             </Tooltip>
@@ -234,15 +241,13 @@ const RequestsPage = () => {
                                 <Table size="medium" aria-label="requests table">
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell align="center">#</TableCell>
-                                            <TableCell align="center">User</TableCell>
-                                            <TableCell align="center">Balance</TableCell>
-                                            <TableCell align="center">Number</TableCell>
-                                            <TableCell align="center">Email</TableCell>
-                                            <TableCell align="center">ID</TableCell>
-                                            <TableCell align="center">Status</TableCell>
-                                            <TableCell align="center">Date</TableCell>
-                                            <TableCell align="center">Actions</TableCell>
+                                            <TableCell>#</TableCell>
+                                            <TableCell>Inviter</TableCell>
+                                            <TableCell>Email</TableCell>
+                                            <TableCell>Code</TableCell>
+                                            <TableCell>Status</TableCell>
+                                            <TableCell>Date</TableCell>
+                                            <TableCell>Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
                                 </Table>

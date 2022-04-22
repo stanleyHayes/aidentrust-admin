@@ -117,7 +117,6 @@ const getRequests = token => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log('get requests', token)
             const {data, count} = response.data;
             dispatch(getRequestsSuccess(data, count));
         } catch (e) {

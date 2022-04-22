@@ -1,9 +1,21 @@
-import {Button, Dialog, DialogContent, Stack, TextField, Typography} from "@mui/material";
+import {
+    Alert,
+    AlertTitle,
+    Button, CircularProgress,
+    Dialog,
+    DialogContent,
+    LinearProgress,
+    Stack,
+    TextField,
+    Typography
+} from "@mui/material";
 import {useState} from "react";
 import validator from "validator/es";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../../redux/authentication/authentication-reducer";
 import {REQUEST_ACTION_CREATORS} from "../../../redux/requests/requests-action-creators";
+import {selectRequest} from "../../../redux/requests/requests-reducer";
+import {LoadingButton} from "@mui/lab";
 
 const UserInvitationDialog = ({open, handleClose}) => {
 
@@ -18,25 +30,31 @@ const UserInvitationDialog = ({open, handleClose}) => {
     const {token} = useSelector(selectAuth);
 
     const handleSubmit = () => {
-        if(!email){
+        if (!email) {
             setError("Email required");
             return;
-        }else{
+        } else {
             setError("");
         }
 
-        if(!validator.isEmail(email)){
+        if (!validator.isEmail(email)) {
             setError("Email is invalid");
             return;
-        }else{
+        } else {
             setError("");
         }
         dispatch(REQUEST_ACTION_CREATORS.createRequest({email}, token, handleClose));
     }
 
+    const {requestLoading, requestError} = useSelector(selectRequest);
+
     return (
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={handleClose} fullWidth={true}>
+            {requestLoading && <LinearProgress color="primary" variant="query"/>}
             <DialogContent>
+                {requestError && (
+                    <Alert severity="error"><AlertTitle>{requestError}</AlertTitle></Alert>
+                )}
                 <Typography mb={2} variant="h4" align="center">
                     Invite User
                 </Typography>
@@ -55,16 +73,19 @@ const UserInvitationDialog = ({open, handleClose}) => {
                         size="medium"
                         onChange={handleChange}
                     />
-                    <Button
+                    <LoadingButton
+                        loading={requestLoading}
+                        loadingPosition="start"
+                        loadingIndicator={<CircularProgress color="secondary" size={20}/>}
                         onClick={handleSubmit}
-                        sx={{color: 'white', my: 2, textTransform: 'capitalize'}}
+                        sx={{color: 'secondary.main', py: 1.7, textTransform: 'capitalize'}}
                         color="primary"
                         disableElevation={true}
                         variant="contained"
                         fullWidth={true}
                         size="large">
                         Invite
-                    </Button>
+                    </LoadingButton>
                 </Stack>
             </DialogContent>
         </Dialog>

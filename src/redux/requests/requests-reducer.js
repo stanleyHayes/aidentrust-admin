@@ -33,6 +33,29 @@ const requestReducer = (state = INITIAL_STATE, action) => {
                 requestLoading: false
             }
 
+        case REQUESTS_ACTION_TYPES.CREATE_REQUEST_REQUEST:
+            return {
+                ...state,
+                requestError: null,
+                requestLoading: true
+            }
+
+        case REQUESTS_ACTION_TYPES.CREATE_REQUEST_SUCCESS:
+            return {
+                ...state,
+                requestError: null,
+                requestLoading: false,
+                requests: [...state.requests, action.payload],
+                totalRequests: state.totalRequests + 1
+            }
+
+        case REQUESTS_ACTION_TYPES.CREATE_REQUEST_FAIL:
+            return {
+                ...state,
+                requestError: action.payload,
+                requestLoading: false
+            }
+
 
         default:
             return state;

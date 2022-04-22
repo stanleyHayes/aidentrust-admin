@@ -13,12 +13,12 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    TextField,
+    TextField, Tooltip,
     Typography
 } from "@mui/material";
 import {makeStyles} from "@mui/styles";
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
 import {Edit, Visibility} from "@mui/icons-material";
@@ -27,6 +27,8 @@ import User from "../../components/shared/user";
 import {selectUser} from "../../redux/users/users-reducer";
 import {useNavigate} from "react-router";
 import UserInvitationDialog from "../../components/dialogs/new/user-invitation-dialog";
+import {USER_ACTION_CREATORS} from "../../redux/users/users-action-creators";
+import {selectAuth} from "../../redux/authentication/authentication-reducer";
 
 const UsersPage = () => {
 
@@ -46,6 +48,8 @@ const UsersPage = () => {
 
     const [query, setQuery] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {token} = useSelector(selectAuth);
 
     const renderStatus = status => {
         switch (status) {
@@ -83,6 +87,11 @@ const UsersPage = () => {
                 );
         }
     }
+
+    useEffect(() => {
+        dispatch(USER_ACTION_CREATORS.getUsers(token));
+    }, [dispatch, token]);
+
     return (
         <Layout>
             {userLoading && <LinearProgress color="secondary" variant="query"/>}
@@ -221,9 +230,9 @@ const UsersPage = () => {
                                                 <TableCell align="center">{user.username}</TableCell>
                                                 <TableCell align="center">{user.phoneNumber}</TableCell>
                                                 <TableCell
-                                                    align="center">{renderStatus(user.accountStatus.status)}</TableCell>
+                                                    align="center">{renderStatus(user.status)}</TableCell>
                                                 <TableCell align="center">
-                                                    {moment(user.updatedAt).fromNow()}
+                                                    {moment(user.createdAt).fromNow()}
                                                 </TableCell>
                                                 <TableCell>
                                                     <Grid
@@ -232,20 +241,36 @@ const UsersPage = () => {
                                                         alignItems="center"
                                                         spacing={1}>
                                                         <Grid item={true}>
-                                                            <Visibility
-                                                                sx={{cursor: 'pointer'}}
-                                                                onClick={() => navigate(`/users/${user._id}/detail`)}
-                                                                fontSize="small"
-                                                                color="primary"
-                                                            />
+                                                            <Tooltip title={`View details of ${user.firstName}`}>
+                                                                <Visibility
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
+                                                                    onClick={() => navigate(`/users/${user._id}/detail`)}
+                                                                    fontSize="small"
+                                                                    color="primary"
+                                                                />
+                                                            </Tooltip>
                                                         </Grid>
                                                         <Grid item={true}>
-                                                            <Edit
-                                                                sx={{cursor: 'pointer'}}
-                                                                onClick={() => navigate(`/users/${user._id}/update`)}
-                                                                fontSize="small"
-                                                                color="primary"
-                                                            />
+                                                            <Tooltip title={`Edit details of ${user.firstName}`}>
+                                                                <Edit
+                                                                    sx={{
+                                                                        cursor: 'pointer',
+                                                                        backgroundColor: purple[100],
+                                                                        padding: 0.5,
+                                                                        borderRadius: 0.5,
+                                                                        fontSize: 28
+                                                                    }}
+                                                                    onClick={() => navigate(`/users/${user._id}/update`)}
+                                                                    fontSize="small"
+                                                                    color="primary"
+                                                                />
+                                                            </Tooltip>
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>
@@ -279,7 +304,7 @@ const UsersPage = () => {
                                 </Table>
                             </TableContainer>
                             <Box sx={{backgroundColor: purple[50]}} py={5}>
-                                <Typography sx={{color: purple[500]}} variant="body2" align="center">
+                                <Typography sx={{color: purple[500]}} variant="body1" align="center">
                                     No users available
                                 </Typography>
                             </Box>

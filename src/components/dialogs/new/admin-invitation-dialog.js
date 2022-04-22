@@ -29,7 +29,7 @@ const InviteAdminDialog = ({open, handleClose}) => {
     }
 
     return (
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={handleClose} fullWidth={true}>
             <DialogContent>
                 <Typography mb={2} variant="h4" align="center">
                     Invite Admin

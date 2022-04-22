@@ -34,14 +34,14 @@ const DesktopDrawer = () => {
                 backgroundColor: grey[200],
                 padding: 0.5,
                 borderRadius: 4,
-                fontSize: 48
+                fontSize: 52
             },
             active: {
                 color: 'text.link',
                 backgroundColor: purple[100],
                 padding: 0.5,
                 borderRadius: 4,
-                fontSize: 48
+                fontSize: 52
             }
         }
     });
@@ -62,8 +62,7 @@ const DesktopDrawer = () => {
                         sx={{
                             color: 'text.link',
                             pl: 4,
-                            fontWeight: 400,
-                            fontFamily: 'Chakra Petch'
+                            fontWeight: 400
                         }} variant="h4">
                         Aiden Trust
                     </Typography>
