@@ -31,6 +31,9 @@ import ResetSuccessAcknowledgmentPage from "./components/shared/acknowledgment";
 import RegistrationAcknowledgmentPage from "./pages/authentication/registration-acknowledgment-page";
 import VerifyAccountPage from "./pages/authentication/verify-account-page";
 import RequireAuth from "./components/shared/require-auth";
+import RequestDetailPage from "./pages/funds/request-detail-page";
+import TransactionDetailPage from "./pages/transactions/transaction-detail-page";
+import SendMoneyPage from "./pages/transactions/send-money-page";
 
 function App() {
 
@@ -49,7 +52,8 @@ function App() {
                 <Route element={<RequireAuth><DashboardPage/></RequireAuth>} path="/"/>
 
                 <Route element={<RequireAuth><TransactionsPage/></RequireAuth>} path="/transactions"/>
-
+                <Route element={<RequireAuth><SendMoneyPage/></RequireAuth>} path="/transaction/send-money"/>
+                <Route element={<RequireAuth><TransactionDetailPage/></RequireAuth>} path="/transactions/:transactionID"/>
                 <Route element={<RequireAuth><InvitationsPage/></RequireAuth>} path="/invitations"/>
 
                 <Route element={<RequireAuth><BankAccountsPage/></RequireAuth>} path="/bank-accounts"/>
@@ -72,6 +76,8 @@ function App() {
 
                 <Route element={<RequireAuth><RequestPage/></RequireAuth>} path="/requests"/>
 
+                <Route element={<RequireAuth><RequestDetailPage/></RequireAuth>} path="/requests/:requestID"/>
+
                 <Route element={<LoginPage/>} path="/auth/login"/>
 
                 <Route element={<RequireAuth><CreateUserPage/></RequireAuth>} path="/new/user"/>
@@ -91,8 +97,6 @@ function App() {
                 <Route element={<ResetPasswordPage/>} path="/auth/reset-password"/>
 
                 <Route element={<RequireAuth><ChangePasswordPage/></RequireAuth>} path="/change-password"/>
-
-                <Route element={<ChangePasswordPage/>} path="/auth/invitation"/>
             </Routes>
         </ThemeProvider>
     );

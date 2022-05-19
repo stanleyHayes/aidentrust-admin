@@ -88,7 +88,7 @@ const BankAccountsPage = () => {
 
     return (
         <Layout>
-            {bankAccountLoading && <LinearProgress color="secondary" variant="query"/>}
+            {bankAccountLoading && <LinearProgress color="primary" variant="query"/>}
             <Container sx={{my: 4, mt: {xs: 8, mt: 4}}}>
                 {
                     bankAccountError &&

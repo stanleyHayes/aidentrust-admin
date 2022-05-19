@@ -37,6 +37,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 userLoading: false
             }
 
+
         case USERS_ACTION_TYPES.GET_USER_REQUEST:
             return {
                 ...state,
@@ -56,6 +57,32 @@ const userReducer = (state = INITIAL_STATE, action) => {
             }
 
         case USERS_ACTION_TYPES.GET_USER_FAIL:
+            return {
+                ...state,
+                userError: action.payload,
+                userLoading: false
+            }
+
+
+        case USERS_ACTION_TYPES.UPDATE_USER_REQUEST:
+            return {
+                ...state,
+                userError: null,
+                userLoading: true
+            }
+
+        case USERS_ACTION_TYPES.UPDATE_USER_SUCCESS:
+            return {
+                ...state,
+                userError: null,
+                userLoading: false,
+                users: [...state.users.map(user => {
+                    if(user._id === action.payload._id) return action.payload;
+                    return user;
+                })]
+            }
+
+        case USERS_ACTION_TYPES.UPDATE_USER_FAIL:
             return {
                 ...state,
                 userError: action.payload,

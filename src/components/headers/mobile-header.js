@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {makeStyles} from "@mui/styles";
 import {useDispatch} from "react-redux";
 import UI_ACTION_CREATORS from "../../redux/ui/ui-action-creators";
+import {orange, purple} from "@mui/material/colors";
 
 const MobileHeader = () => {
 
@@ -24,11 +25,13 @@ const MobileHeader = () => {
                 <Grid item={true}>
                     <Menu
                         sx={{
-                            color: 'secondary.main',
+                            color: purple[800],
                             borderWidth: 1.6,
                             borderStyle: 'solid',
-                            borderRadius: 1,
-                            p: 0.2
+                            borderRadius: 0.2,
+                            p: 0.2,
+                            fontSize: 32,
+                            backgroundColor: purple[100]
                         }}
                         onClick={() => dispatch(UI_ACTION_CREATORS.openDrawer())}/>
                 </Grid>

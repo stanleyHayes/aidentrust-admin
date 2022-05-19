@@ -210,4 +210,94 @@ const deleteRequest = (ID, token) => {
 }
 
 
-export const REQUEST_ACTION_CREATORS = {createRequest, deleteRequest, updateRequest, getRequests, getRequest};
+const approveRequestRequest = () => {
+    return {
+        type: REQUESTS_ACTION_TYPES.APPROVE_REQUEST_REQUEST
+    }
+}
+
+const approveRequestSuccess = (data) => {
+    return {
+        type: REQUESTS_ACTION_TYPES.APPROVE_REQUEST_SUCCESS,
+        payload: data
+    }
+}
+
+const approveRequestFailure = message => {
+    return {
+        type: REQUESTS_ACTION_TYPES.APPROVE_REQUEST_FAIL,
+        payload: message
+    }
+}
+
+const approveRequest = (ID, token) => {
+    return async dispatch => {
+        try {
+            dispatch(approveRequestRequest());
+            const response = await axios({
+                method: 'POST',
+                url: `${CONSTANTS.SERVER_BASE_URL}/requests/${ID}/approve`,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const {data} = response.data;
+            dispatch(approveRequestSuccess(data));
+        } catch (e) {
+            const {message} = e.response.data;
+            dispatch(approveRequestFailure(message));
+        }
+    }
+}
+
+
+const revokeRequestRequest = () => {
+    return {
+        type: REQUESTS_ACTION_TYPES.REVOKE_REQUEST_REQUEST
+    }
+}
+
+const revokeRequestSuccess = (data) => {
+    return {
+        type: REQUESTS_ACTION_TYPES.REVOKE_REQUEST_SUCCESS,
+        payload: data
+    }
+}
+
+const revokeRequestFailure = message => {
+    return {
+        type: REQUESTS_ACTION_TYPES.REVOKE_REQUEST_FAIL,
+        payload: message
+    }
+}
+
+const revokeRequest = (ID, token) => {
+    return async dispatch => {
+        try {
+            dispatch(revokeRequestRequest());
+            const response = await axios({
+                method: 'POST',
+                url: `${CONSTANTS.SERVER_BASE_URL}/requests/${ID}/revoke`,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const {data} = response.data;
+            dispatch(revokeRequestSuccess(data));
+        } catch (e) {
+            const {message} = e.response.data;
+            dispatch(revokeRequestFailure(message));
+        }
+    }
+}
+
+
+export const REQUEST_ACTION_CREATORS = {
+    createRequest,
+    deleteRequest,
+    updateRequest,
+    getRequests,
+    getRequest,
+    approveRequest,
+    revokeRequest
+};

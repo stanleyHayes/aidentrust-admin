@@ -209,4 +209,57 @@ const deleteTransaction = (ID, token) => {
 }
 
 
-export const TRANSACTION_ACTION_CREATORS = {createTransaction, deleteTransaction, updateTransaction, getTransactions, getTransaction};
+const sendMoneyRequest = () => {
+    return {
+        type: TRANSACTIONS_ACTION_TYPES.SEND_MONEY_REQUEST
+    }
+}
+
+const sendMoneySuccess = (data) => {
+    console.log(data)
+    return {
+        type: TRANSACTIONS_ACTION_TYPES.SEND_MONEY_SUCCESS,
+        payload: data
+    }
+}
+
+const sendMoneyFailure = message => {
+    return {
+        type: TRANSACTIONS_ACTION_TYPES.SEND_MONEY_FAIL,
+        payload: message
+    }
+}
+
+const sendMoney = (transaction, token, handleClose, resetFields) => {
+    return async dispatch => {
+        try {
+            dispatch(sendMoneyRequest());
+            const response = await axios({
+                method: 'POST',
+                url: `${CONSTANTS.SERVER_BASE_URL}/transactions/transfer`,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                data: transaction
+            });
+            const {data} = response.data;
+            dispatch(sendMoneySuccess(data));
+            handleClose();
+            resetFields();
+        } catch (e) {
+            const {message} = e.response.data;
+            dispatch(sendMoneyFailure(message));
+            handleClose();
+        }
+    }
+}
+
+
+export const TRANSACTION_ACTION_CREATORS = {
+    createTransaction,
+    deleteTransaction,
+    updateTransaction,
+    getTransactions,
+    getTransaction,
+    sendMoney
+};

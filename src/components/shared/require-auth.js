@@ -14,7 +14,7 @@ const RequireAuth = ({children}) => {
 
     useEffect(() => {
         dispatch(AUTH_ACTION_CREATORS.getProfile(token, navigate))
-    }, [dispatch, navigate, token]);
+    }, []);
 
     if (splashLoading) {
         return <Splash/>;

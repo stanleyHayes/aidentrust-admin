@@ -3,7 +3,7 @@ import {TRANSACTIONS_ACTION_TYPES} from "./transaction-action-types";
 const INITIAL_STATE = {
     transactions: [],
     transactionDetail: {},
-    transactionLoading: false,
+    transactionLoading: true,
     transactionError: false,
     totalTransactions: 0
 }
@@ -81,6 +81,31 @@ const transactionReducer = (state = INITIAL_STATE, action) => {
                 transactionError: action.payload,
                 transactionLoading: false
             }
+
+
+        case TRANSACTIONS_ACTION_TYPES.SEND_MONEY_REQUEST:
+            return {
+                ...state,
+                transactionError: null,
+                transactionLoading: true
+            }
+
+        case TRANSACTIONS_ACTION_TYPES.SEND_MONEY_SUCCESS:
+            return {
+                ...state,
+                transactionError: null,
+                transactionLoading: false,
+                transactions: action.payload.data,
+                totalTransactions: state.totalTransactions + 1
+            }
+
+        case TRANSACTIONS_ACTION_TYPES.SEND_MONEY_FAIL:
+            return {
+                ...state,
+                transactionError: action.payload,
+                transactionLoading: false
+            }
+
         default:
             return state;
     }

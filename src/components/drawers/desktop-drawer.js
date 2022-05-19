@@ -73,7 +73,15 @@ const DesktopDrawer = () => {
                     <SidebarLink
                         icon={
                             pathname === '/' ?
-                                <Dashboard className={classes.active}/> :
+                                <Dashboard
+                                    fontSize="large"
+                                    sx={{
+                                        color: 'text.link',
+                                        backgroundColor: purple[100],
+                                        padding: 0.2,
+                                        borderRadius: 0.2,
+                                        fontSize: 32
+                                    }}/> :
                                 <DashboardOutlined className={classes.inactive}/>
                         }
                         path="/"

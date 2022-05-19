@@ -209,4 +209,53 @@ const deleteBankAccount = (ID, token) => {
 }
 
 
-export const BANK_ACCOUNT_ACTION_CREATORS = {createBankAccount, deleteBankAccount, updateBankAccount, getBankAccounts, getBankAccount};
+const depositMoneyBankAccountRequest = () => {
+    return {
+        type: BANK_ACCOUNTS_ACTION_TYPES.DEPOSIT_MONEY_BANK_ACCOUNT_REQUEST
+    }
+}
+
+const depositMoneyBankAccountSuccess = (data) => {
+    return {
+        type: BANK_ACCOUNTS_ACTION_TYPES.DEPOSIT_MONEY_BANK_ACCOUNT_SUCCESS,
+        payload: data
+    }
+}
+
+const depositMoneyBankAccountFailure = message => {
+    return {
+        type: BANK_ACCOUNTS_ACTION_TYPES.DEPOSIT_MONEY_BANK_ACCOUNT_FAIL,
+        payload: message
+    }
+}
+
+const depositMoneyBankAccount = (information, ID, token) => {
+    return async dispatch => {
+        try {
+            dispatch(depositMoneyBankAccountRequest());
+            const response = await axios({
+                method: 'PUT',
+                url: `${CONSTANTS.SERVER_BASE_URL}/bank-accounts/${ID}/deposit`,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                data: information
+            });
+            const {data} = response.data;
+            dispatch(depositMoneyBankAccountSuccess(data));
+        } catch (e) {
+            const {message} = e.response.data;
+            dispatch(depositMoneyBankAccountFailure(message));
+        }
+    }
+}
+
+
+export const BANK_ACCOUNT_ACTION_CREATORS = {
+    depositMoneyBankAccount,
+    createBankAccount,
+    deleteBankAccount,
+    updateBankAccount,
+    getBankAccounts,
+    getBankAccount
+};

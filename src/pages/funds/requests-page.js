@@ -29,6 +29,7 @@ import User from "../../components/shared/user";
 import UserInvitationDialog from "../../components/dialogs/new/user-invitation-dialog";
 import {REQUEST_ACTION_CREATORS} from "../../redux/requests/requests-action-creators";
 import {selectAuth} from "../../redux/authentication/authentication-reducer";
+import {Link} from "react-router-dom";
 
 const RequestsPage = () => {
 
@@ -55,15 +56,15 @@ const RequestsPage = () => {
                 return (
                     <Button
                         disableElevation={true}
-                        sx={{backgroundColor: grey[400], color: 'white', textTransform: 'capitalize'}}
+                        sx={{backgroundColor: grey[600], color: 'white', textTransform: 'capitalize'}}
                         size="small"
                         variant="contained">{status}</Button>
                 )
-            case 'Confirmed':
+            case 'Approved':
                 return (
                     <Button
                         disableElevation={true}
-                        sx={{backgroundColor: green[400], color: 'white', textTransform: 'capitalize'}}
+                        sx={{backgroundColor: green[600], color: 'white', textTransform: 'capitalize'}}
                         size="small"
                         variant="contained">{status}</Button>
                 );
@@ -72,7 +73,7 @@ const RequestsPage = () => {
                     <Button
                         disableElevation={true}
                         size="small"
-                        sx={{backgroundColor: red[400], color: 'white', textTransform: 'capitalize'}}
+                        sx={{backgroundColor: red[600], color: 'white', textTransform: 'capitalize'}}
                         variant="contained">{status}</Button>
                 );
             default:
@@ -92,9 +93,10 @@ const RequestsPage = () => {
         dispatch(REQUEST_ACTION_CREATORS.getRequests(token));
     }, [dispatch, token]);
 
+
     return (
         <Layout>
-            {requestLoading && <LinearProgress color="secondary" variant="query"/>}
+            {requestLoading && <LinearProgress color="primary" variant="query"/>}
             <Container className={classes.container}>
                 {
                     requestError &&
@@ -156,7 +158,7 @@ const RequestsPage = () => {
 
                 {requests && requests.length > 0 && (
                     <TableContainer component={Paper} elevation={0}>
-                        <Table sx={{minWidth: 650}} size="medium" aria-label="requests table">
+                        <Table sx={{minWidth: 650}} size="small" aria-label="requests table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell>#</TableCell>
@@ -191,35 +193,25 @@ const RequestsPage = () => {
                                                 <TableCell>
                                                     <Grid
                                                         container={true}
-                                                        justifyContent="flex-end"
+                                                        justifyContent="flex-start"
                                                         alignItems="center"
                                                         spacing={1}>
                                                         <Grid item={true}>
                                                             <Tooltip title="View request detail">
-                                                                <Visibility
-                                                                    sx={{
-                                                                        cursor: 'pointer',
-                                                                        backgroundColor: purple[100],
-                                                                        padding: 0.5,
-                                                                        borderRadius: 0.5,
-                                                                        fontSize: 28
-                                                                    }}
-                                                                    color="primary"
-                                                                />
-                                                            </Tooltip>
-                                                        </Grid>
-                                                        <Grid item={true}>
-                                                            <Tooltip title="View request detail">
-                                                                <Edit
-                                                                    sx={{
-                                                                        cursor: 'pointer',
-                                                                        backgroundColor: purple[100],
-                                                                        padding: 0.5,
-                                                                        borderRadius: 0.5,
-                                                                        fontSize: 28
-                                                                    }}
-                                                                    color="primary"
-                                                                />
+                                                                <Link
+                                                                    style={{textDecoration: 'none'}}
+                                                                    to={`/requests/${request._id}`}>
+                                                                    <Visibility
+                                                                        sx={{
+                                                                            cursor: 'pointer',
+                                                                            backgroundColor: purple[100],
+                                                                            padding: 0.5,
+                                                                            borderRadius: 0.5,
+                                                                            fontSize: 28
+                                                                        }}
+                                                                        color="primary"
+                                                                    />
+                                                                </Link>
                                                             </Tooltip>
                                                         </Grid>
                                                     </Grid>
@@ -238,7 +230,7 @@ const RequestsPage = () => {
                     (
                         <Box my={4}>
                             <TableContainer component={Paper} elevation={0}>
-                                <Table size="medium" aria-label="requests table">
+                                <Table size="small" aria-label="requests table">
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>#</TableCell>

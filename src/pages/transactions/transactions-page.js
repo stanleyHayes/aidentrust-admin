@@ -14,17 +14,23 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TableRow, Tooltip,
+    TableRow,
+    Tooltip,
     Typography
 } from "@mui/material";
 import {makeStyles} from "@mui/styles";
-import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {selectTransaction} from "../../redux/transactions/transaction-reducer";
 import {Alert, AlertTitle} from "@mui/lab";
 import moment from "moment";
-import { Visibility} from "@mui/icons-material";
+import {SendSharp, Visibility} from "@mui/icons-material";
 import {green, grey, purple, red} from "@mui/material/colors";
+import {selectAuth} from "../../redux/authentication/authentication-reducer";
+import {TRANSACTION_ACTION_CREATORS} from "../../redux/transactions/transaction-action-creators";
+import User from "../../components/shared/user";
+import {useNavigate} from "react-router";
+import {Link} from "react-router-dom";
 
 const TransactionsPage = () => {
 
@@ -40,32 +46,34 @@ const TransactionsPage = () => {
     const [status, setStatus] = useState("All");
 
     const {transactions, transactionError, transactionLoading} = useSelector(selectTransaction);
+    const {token} = useSelector(selectAuth);
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const renderStatus = status => {
         switch (status) {
-            case 'pending':
+            case 'Pending':
                 return (
                     <Button
                         disableElevation={true}
-                        sx={{backgroundColor: grey[400], color: 'white', textTransform: 'capitalize'}}
+                        sx={{backgroundColor: grey[800], color: 'white', textTransform: 'capitalize'}}
                         size="small"
                         variant="contained">{status}</Button>
                 )
-            case 'success':
+            case 'Success':
                 return (
                     <Button
                         disableElevation={true}
-                        sx={{backgroundColor: green[400], color: 'white', textTransform: 'capitalize'}}
+                        sx={{backgroundColor: green[800], color: 'white', textTransform: 'capitalize'}}
                         size="small"
                         variant="contained">{status}</Button>
                 );
-            case 'failed':
+            case 'Failed':
                 return (
                     <Button
                         disableElevation={true}
                         size="small"
-                        sx={{backgroundColor: red[400], color: 'white', textTransform: 'capitalize'}}
+                        sx={{backgroundColor: red[800], color: 'white', textTransform: 'capitalize'}}
                         variant="contained">{status}</Button>
                 );
             default:
@@ -73,11 +81,17 @@ const TransactionsPage = () => {
                     <Button
                         disableElevation={true}
                         size="small"
-                        sx={{backgroundColor: grey[400], color: 'white', textTransform: 'capitalize'}}
+                        sx={{backgroundColor: grey[800], color: 'white', textTransform: 'capitalize'}}
                         variant="contained">{status}</Button>
                 );
         }
     }
+
+    useEffect(() => {
+        dispatch(TRANSACTION_ACTION_CREATORS.getTransactions(token));
+    }, []);
+
+    const navigate = useNavigate();
 
     return (
         <Layout>
@@ -105,6 +119,7 @@ const TransactionsPage = () => {
                             Transactions ({transactions && transactions.length})
                         </Typography>
                     </Grid>
+
                     <Grid item={true} xs={12} md={2}>
                         <Select
                             margin="dense"
@@ -121,6 +136,27 @@ const TransactionsPage = () => {
                             <MenuItem value="Failed">Failed</MenuItem>
                         </Select>
                     </Grid>
+                    <Grid item={true} xs={12} md="auto">
+                        <Link to="/transaction/send-money" style={{textDecoration: 'none'}}>
+                            <Button
+                                sx={{
+                                    textTransform: 'capitalize',
+                                    color: purple[600],
+                                    backgroundColor: 'white',
+                                    borderWidth: 2,
+                                    '&:hover': {
+                                        borderWidth: 2,
+                                    }
+                                }}
+                                startIcon={<SendSharp fontSize="small" sx={{color: purple[600]}}/>}
+                                variant="outlined"
+                                fullWidth={true}
+                                disableElevation={true}
+                                size="large">
+                                Transfer Money
+                            </Button>
+                        </Link>
+                    </Grid>
                 </Grid>
 
                 <Divider light={true} variant="fullWidth" sx={{my: 4}}/>
@@ -132,8 +168,8 @@ const TransactionsPage = () => {
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="center">#</TableCell>
-                                    <TableCell align="center">Sender Account</TableCell>
-                                    <TableCell align="center">Recipient Account</TableCell>
+                                    <TableCell align="center">User</TableCell>
+                                    <TableCell align="center">Bank Account</TableCell>
                                     <TableCell align="center">Type</TableCell>
                                     <TableCell align="center">Amount</TableCell>
                                     <TableCell align="center">Status</TableCell>
@@ -149,23 +185,34 @@ const TransactionsPage = () => {
                                                 hover={true}
                                                 key={index}>
                                                 <TableCell align="center">{index + 1}</TableCell>
-                                                <TableCell align="center">{transaction.senderAccount}</TableCell>
-                                                <TableCell align="center">{transaction.recipientAccount}</TableCell>
+                                                <TableCell align="center">{
+                                                    <User
+                                                        lastName={transaction.user.lastName}
+                                                        firstName={transaction.user.firstName}
+                                                        image={transaction.user.image}
+                                                    />
+                                                }</TableCell>
+                                                <TableCell align="center">{transaction.bankAccount.number}</TableCell>
                                                 <TableCell align="center">{transaction.type}</TableCell>
-                                                <TableCell align="center">${transaction.amount}</TableCell>
+                                                <TableCell
+                                                    align="center"
+                                                    sx={{
+                                                        color: transaction.type === 'deposit' ? green[800] : red[800]
+                                                    }}>${transaction.amount}</TableCell>
                                                 <TableCell align="center">{renderStatus(transaction.status)}</TableCell>
                                                 <TableCell align="center">
-                                                    {moment(transaction.modifiedAt).fromNow()}
+                                                    {moment(transaction.updatedAt).fromNow()}
                                                 </TableCell>
                                                 <TableCell>
                                                     <Grid
                                                         container={true}
-                                                        justifyContent="flex-end"
+                                                        justifyContent="flex-start"
                                                         alignItems="center"
                                                         spacing={1}>
                                                         <Grid item={true}>
                                                             <Tooltip title={`View transaction detail`}>
                                                                 <Visibility
+                                                                    onClick={() => navigate(`/transactions/${transaction._id}`)}
                                                                     sx={{
                                                                         cursor: 'pointer',
                                                                         backgroundColor: purple[100],

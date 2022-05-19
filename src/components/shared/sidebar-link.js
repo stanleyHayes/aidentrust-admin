@@ -31,10 +31,10 @@ const SidebarLink = ({active, path, label, icon}) => {
                 textTransform: 'capitalize',
                 fontSize: 14,
                 paddingLeft: 4,
-                py: 1.3
+                py: 1.8
             }}
             variant="text"
-            size="medium"
+            size="large"
             fullWidth={true}
             onClick={handleClick}>
             {label}

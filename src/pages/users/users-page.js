@@ -94,7 +94,7 @@ const UsersPage = () => {
 
     return (
         <Layout>
-            {userLoading && <LinearProgress color="secondary" variant="query"/>}
+            {userLoading && <LinearProgress color="primary" variant="query"/>}
             <Container className={classes.container}>
                 {
                     userError &&
