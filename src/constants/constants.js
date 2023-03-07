@@ -2,7 +2,8 @@ const AIDEN_TRUST_ADMIN_THEME_VARIANT_KEY = 'AIDEN_TRUST_ADMIN_THEME_VARIANT_KEY
 const AIDEN_TRUST_ADMIN_AUTH_DATA_KEY = 'AIDEN_TRUST_ADMIN_AUTH_DATA_KEY';
 const AIDEN_TRUST_ADMIN_AUTH_TOKEN_KEY = 'AIDEN_TRUST_ADMIN_AUTH_TOKEN_KEY';
 // const SERVER_BASE_URL = 'http://localhost:7008/api/v1/admin';
-const SERVER_BASE_URL = 'https://aidentrust.herokuapp.com/api/v1/admin';
+// const SERVER_BASE_URL = 'https://aidentrust.herokuapp.com/api/v1/admin';
+const SERVER_BASE_URL = 'https://aidentrust-api.vercel.app/api/v1/admin';
 
 export const CONSTANTS = {
     AIDEN_TRUST_ADMIN_THEME_VARIANT_KEY,
